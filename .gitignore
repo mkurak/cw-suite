@@ -28,9 +28,6 @@ pnpm-debug.log*
 .idea/
 .vscode/
 
-# Misc
-*.local
-
 # Credentials
 .npmrc
 **/.npmrc
