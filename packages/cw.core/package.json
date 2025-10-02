@@ -1,5 +1,5 @@
 {
-  "name": "cw.core",
+  "name": "@cw-suite/core",
   "version": "0.1.0",
   "description": "Aggregated core utilities for cw API projects.",
   "type": "module",
@@ -34,8 +34,7 @@
     "cw.api.core.events": "workspace:^",
     "cw.api.core.queue.local": "workspace:^",
     "cw.helper.colored.console": "workspace:^",
-    "cw.helper.dev.runner": "workspace:^",
-    "cw.helper.package.generator": "workspace:^"
+    "cw.helper.dev.runner": "workspace:^"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
@@ -64,5 +63,14 @@
     "api",
     "core",
     "typescript"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mkurak/cw-suite.git",
+    "directory": "packages/cw.core"
+  },
+  "bugs": {
+    "url": "https://github.com/mkurak/cw-suite/issues"
+  },
+  "homepage": "https://github.com/mkurak/cw-suite#readme"
 }

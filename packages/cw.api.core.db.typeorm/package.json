@@ -25,11 +25,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mkurak/cw.api.core.db.typeorm"
+    "url": "https://github.com/mkurak/cw-suite.git",
+    "directory": "packages/cw.api.core.db.typeorm"
   },
-  "homepage": "https://github.com/mkurak/cw.api.core.db.typeorm#readme",
+  "homepage": "https://github.com/mkurak/cw-suite#readme",
   "bugs": {
-    "url": "https://github.com/mkurak/cw.api.core.db.typeorm/issues"
+    "url": "https://github.com/mkurak/cw-suite/issues"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",

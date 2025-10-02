@@ -75,3 +75,10 @@
 - Consolidated gitignore and prettier ignore rules at the repo root; per-package `.gitignore`/`.prettierignore` removed.
 - Per-package ESLint configs removed; packages now rely on root `eslint.config.mjs` via default discovery.
 - Left Jest and tsconfig files in place because packages need bespoke module/coverage settings; consider introducing shared base templates later if requirements converge.
+
+### Release Automation
+- Added `.github/workflows/release.yml` to run on pushes to `main`: installs deps, runs `pnpm changeset version`, commits version bumps, and publishes via `pnpm changeset publish` using `NPM_TOKEN`.
+- Created `.changeset/all-packages-patch.md` to issue patch bumps across all active packages for initial release validation.
+
+## 2025-10-02 07:42:20Z
+- Verified release pipeline setup.

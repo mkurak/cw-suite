@@ -21,8 +21,8 @@
 - [ ] Update CODEX/TODO as mapping decisions are made per package.
 
 ## 3. Publication Workflow
-- [ ] Configure Changesets release flows (version bump, changelog generation, `pnpm changeset publish`).
-- [ ] Update GitHub Actions pipeline to run pnpm commands and publish changed packages automatically.
+- [x] Configure Changesets release flows (version bump, changelog generation, `pnpm changeset publish`).
+- [x] Update GitHub Actions pipeline to run pnpm commands and publish changed packages automatically.
 - [ ] Validate that publishing core also publishes dependent packages when necessary.
 
 ## 4. Cleanup & Migration

@@ -70,10 +70,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mkurak/cw.helper.colored.console.git"
+    "url": "https://github.com/mkurak/cw-suite.git",
+    "directory": "packages/cw.helper.colored.console"
   },
   "bugs": {
-    "url": "https://github.com/mkurak/cw.helper.colored.console/issues"
+    "url": "https://github.com/mkurak/cw-suite/issues"
   },
-  "homepage": "https://github.com/mkurak/cw.helper.colored.console"
+  "homepage": "https://github.com/mkurak/cw-suite#readme"
 }

@@ -59,12 +59,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mkurak/cw.api.core.di.git"
+    "url": "https://github.com/mkurak/cw-suite.git",
+    "directory": "packages/cw.api.core.di"
   },
   "bugs": {
-    "url": "https://github.com/mkurak/cw.api.core.di/issues"
+    "url": "https://github.com/mkurak/cw-suite/issues"
   },
-  "homepage": "https://github.com/mkurak/cw.api.core.di",
+  "homepage": "https://github.com/mkurak/cw-suite#readme",
   "type": "module",
   "exports": {
     ".": {

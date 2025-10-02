@@ -72,10 +72,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mkurak/cw.helper.dev.runner.git"
+    "url": "https://github.com/mkurak/cw-suite.git",
+    "directory": "packages/cw.helper.dev.runner"
   },
   "bugs": {
-    "url": "https://github.com/mkurak/cw.helper.dev.runner/issues"
+    "url": "https://github.com/mkurak/cw-suite/issues"
   },
-  "homepage": "https://github.com/mkurak/cw.helper.dev.runner"
+  "homepage": "https://github.com/mkurak/cw-suite#readme"
 }
