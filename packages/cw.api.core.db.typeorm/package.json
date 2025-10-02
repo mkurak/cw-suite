@@ -1,6 +1,6 @@
 {
   "name": "@cw-suite/api-db-typeorm",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "TypeORM integration for cw API services",
   "type": "module",
   "main": "./dist/index.js",

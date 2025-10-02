@@ -1,6 +1,6 @@
 {
   "name": "@cw-suite/api-cache-memory",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "In-memory cache utilities for cw API",
   "type": "module",
   "main": "./dist/index.js",

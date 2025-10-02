@@ -1,6 +1,6 @@
 {
   "name": "@cw-suite/api-core",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Core Express server utilities for cw API projects.",
   "license": "ISC",
   "main": "dist/index.js",
