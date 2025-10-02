@@ -30,3 +30,7 @@ pnpm-debug.log*
 
 # Misc
 *.local
+
+# Credentials
+.npmrc
+**/.npmrc
