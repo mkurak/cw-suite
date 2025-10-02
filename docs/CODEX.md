@@ -81,3 +81,4 @@
 - Release workflow (`.github/workflows/release.yml`) publishing scoped packages—pending successful `@cw-suite` org setup and fresh `NPM_TOKEN`.
 - Changeset updated to patch-bump all scoped packages; next run should publish `@cw-suite/api-core@0.2.2`, `@cw-suite/helper-dev-runner@1.0.10`, etc.
 - Outstanding: `@cw-suite/helper-colored-console` tests need `@jest/globals` dev dependency.
+- Replaced wildcard exports in `@cw-suite/api-cache-memory` with explicit named exports to align tree-shaking behaviour; continue auditing remaining packages.
