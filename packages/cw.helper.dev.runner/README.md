@@ -1,93 +1,86 @@
 # @cw-suite/helper-dev-runner
 
-`@cw-suite/helper-dev-runner` provides a lightweight development runtime that watches your project directories, triggers builds, and restarts your application without relying on external reload tools.
+Dosya değişikliklerini izleyen, isteğe bağlı build komutu çalıştıran ve uygulamanızı yeniden başlatan minimal geliştirme runner'ı.
 
-## Features
+## Öne Çıkanlar
+- **Tek süreçte akış** – build komutunu bekleyip ardından çalıştırma komutunu yeniden başlatır.
+- **Debounce** – sık dosya değişikliklerinde gereksiz restart'ı engeller.
+- **Gözlemlenebilir loglar** – standart çıktıyı kullanan yalın logger.
+- **JSON konfigürasyonu** – `cw-dev-runner.config.json` ile repo kökünden yönetilir.
+- **CLI veya kütüphane** – CLI'ı doğrudan kullanabilir ya da `DevRunner` sınıfını programatik olarak çağırabilirsiniz.
 
-- Minimal dependencies — uses Node.js and TypeScript only
-- Recursive directory watching with configurable ignore rules
-- Optional build command before each restart
-- CLI overrides for quick experimentation
-
-## Installation
-
-Install the runner alongside your service or library:
+## Kurulum
 
 ```bash
 npm install --save-dev @cw-suite/helper-dev-runner
 ```
 
-## Usage
-
-Add a config file (`cw-dev-runner.config.json`) to your project:
-
-```json
-{
-  "watchDirs": ["src"],
-  "ignore": ["dist", "node_modules"],
-  "build": "npm run build",
-  "run": "node dist/server.js"
-}
-```
-
-Then add an npm script:
+## CLI Kullanımı
+`package.json` script'i ekleyin:
 
 ```json
 {
   "scripts": {
-    "dev": "cw-dev-runner"
+    "dev:w": "cw-dev-runner --config ./cw-dev-runner.config.json"
   }
 }
 ```
 
-Run `npm run dev` to start the watcher. You can override settings from the CLI:
+Örnek `cw-dev-runner.config.json`:
 
-```bash
-cw-dev-runner --run "node dist/server.js" --no-build --watch src --watch tests
+```json
+{
+  "cwd": ".",
+  "buildCommand": "pnpm build",
+  "runCommand": "node dist/server.js",
+  "waitForPath": "dist/server.js",
+  "watch": true,
+  "buildWatchCommand": "pnpm build -- --watch",
+  "runWithNodeWatch": true,
+  "logLevel": "info"
+}
 ```
 
-Use `cw-dev-runner --help` to see all available flags.
+- `buildCommand` ilk çalıştırmada senkron olarak yürütülür.
+- `buildWatchCommand` watch modu açıkken arka planda çalıştırılır (opsiyonel).
+- `runWithNodeWatch: true` ise Node'un yerleşik `--watch` özelliği kullanılır.
+- `waitForPath` build sonrası beklenen dosyayı doğrular, yoksa zaman aşımı verir.
 
-## Programmatic API
+## Programatik Kullanım
 
 ```ts
 import { loadConfig, resolveConfig, DevRunner } from '@cw-suite/helper-dev-runner';
 
-const { config } = loadConfig();
-const resolved = resolveConfig(config, { run: 'node dist/server.js' });
+const { config } = loadConfig(); // cw-dev-runner.config.json okur (opsiyonel)
+const resolved = resolveConfig(config, {
+  run: { command: 'node', args: ['dist/server.js'] }
+});
 
 const runner = new DevRunner(resolved);
 await runner.start();
+
+process.on('SIGINT', async () => {
+  await runner.stop();
+  process.exit(0);
+});
 ```
 
-Remember to call `runner.stop()` when you need to shut the watcher down programmatically.
+### `ResolvedRunnerConfig`
+| Alan | Açıklama | Varsayılan |
+| --- | --- | --- |
+| `projectRoot` | izleme ve komutlar için çalışma dizini | `process.cwd()` |
+| `watchDirs` | izlenecek klasörler | `['src']` |
+| `ignore` | yok sayılan klasörler | `['node_modules','dist','coverage','.git']` |
+| `debounceMs` | restart debouncing süresi | `200` |
+| `build` | isteğe bağlı build komutu | yok |
+| `run` | zorunlu çalışma komutu | `node dist/index.js` |
 
-## Tooling & Scripts
+## Dosya İzleme Davranışı
+- `DirectoryWatcher` recursive olarak `watchDirs` altında değişiklik yakalar.
+- Her değişiklikte runner, build komutunu (tanımlıysa) çalıştırır, ardından run komutunu yeniden başlatır.
+- Eş zamanlı değişiklikler `debounceMs` ile gruplanır; ilk build bitmeden yeni build başlatılmaz.
 
-- `npm run build` – compile TypeScript to ESM output under `dist/`
-- `npm run test` – execute Jest (ESM mode via `ts-jest` presets)
-- `npm run test:coverage` – run tests with coverage thresholds enforced
-- `npm run lint` – lint sources and tests with ESLint 9 flat config
-- `npm run format` – apply Prettier formatting
-- `npm version <type>` – bump version and create commit/tag (follow with `git push --follow-tags`)
-- `npm run prepublishOnly` – build and execute the smoke test ahead of publishing
+## Log Düzeyleri
+Logger `info`, `warn`, `error`, `debug` seviyelerini destekler. CLI kullanımında `logLevel` alanı, `DevRunner` sınıfında ise isteğe bağlı özel logger geçebilirsiniz.
 
-Pre-commit hooks (installed via `npm run prepare`) run format → lint → coverage to keep the repository consistent.
-
-## Scripts
-
-- `npm run build` – compile TypeScript to `dist`
-- `npm test` – execute Jest test suite
-- `npm run lint` – lint sources with ESLint
-- `npm run format` – apply Prettier formatting rules
-
-## Configuration Reference
-
-- `watchDirs`: array of directories (relative to project root) to monitor
-- `ignore`: directory names to ignore (merged with defaults: `node_modules`, `dist`, `coverage`, `.git`)
-- `build`: command string or object executed before restarting the app
-- `run`: command string or object that starts your application (defaults to `node dist/index.js`)
-- `debounceMs`: delay before rerunning commands after changes (default: 200ms)
-- `projectRoot`: override root directory (defaults to current working directory)
-
-Enjoy your custom dev workflow! 🎯
+README yenileme maddesi tamamlandığında `docs/TODO.md` üzerindeki ilgili kutucuk işaretlenmelidir.

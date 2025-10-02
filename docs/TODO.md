@@ -27,6 +27,16 @@
 - [ ] Deprecate redundant packages or document their continued independent usage.
 - [ ] Final review: ensure CODEX and README files reflect new architecture.
 
+## 5. README Refresh Tasks
+- [x] Update `@cw-suite/api-core` README with current bootstrap patterns, dev runner usage, and health check wiring.
+- [x] Update `@cw-suite/api-di` README to reflect latest module/metadata APIs and DI lifecycles.
+- [x] Update `@cw-suite/api-cache-memory` README with cache configuration, eviction metrics, and DI integration flow.
+- [x] Update `@cw-suite/api-db-typeorm` README covering datasource lifecycle, migration commands, and DI bindings.
+- [x] Update `@cw-suite/api-events` README explaining event bus hooks, lifecycle, and module registration examples.
+- [x] Update `@cw-suite/api-queue-local` README with worker setup, ack/nack semantics, DLQ usage, and DI wiring.
+- [x] Update `@cw-suite/helper-colored-console` README to document logger themes, formatting helpers, and CLI usage.
+- [x] Update `@cw-suite/helper-dev-runner` README detailing watch/rebuild flow, configuration, and script integration.
+
 ## Tracking Notes
 - Maintain progress updates in `docs/CODEX.md` after each major milestone.
 - Extend this checklist as new requirements emerge during implementation.
