@@ -5,7 +5,15 @@
     "moduleResolution": "node",
     "rootDir": ".",
     "outDir": "dist",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@cw-suite/api-di": ["../cw.api.core.di/dist/index"],
+      "@cw-suite/api-cache-memory": ["../cw.api.core.cache.memory/dist/index"],
+      "@cw-suite/api-events": ["../cw.api.core.events/dist/index"],
+      "@cw-suite/api-queue-local": ["../cw.api.core.queue.local/dist/index"],
+      "@cw-suite/api-db-typeorm": ["../cw.api.core.db.typeorm/dist/index"]
+    }
   },
   "include": ["src/**/*.ts", "tests/**/*.ts"],
   "exclude": ["node_modules", "dist"]

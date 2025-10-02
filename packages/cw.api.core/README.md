@@ -63,6 +63,15 @@ app.get(config.healthCheckPath, async (_req, res) => {
 });
 ```
 
+## Bootstrap Helpers
+- `createApiApp({ container, coreModules, modules, onContainerReady, onAppCreated })`
+  - Registers the default module set (cache + events) on the provided container.
+  - Pass `coreModules: { queue: true, typeorm: true }` to opt into additional helpers.
+  - Supply `coreModules: false` to skip automatic module registration altogether.
+- `startApiServer(options)` – convenient wrapper that calls `createApiApp` and `app.listen`, returning `{ app, config, container, server }`.
+- `registerCoreModules({ container, queue?, typeorm?, extras? })` – registers the selected modules without creating an Express app.
+- `createDevRunnerConfig(overrides)` / `DEFAULT_DEV_RUNNER_CONFIG` – JSON template for `cw-dev-runner.config.json` files.
+
 ## Testing
 `createApp` returns an Express instance that works seamlessly with SuperTest:
 
@@ -84,5 +93,10 @@ describe('health check', () => {
 - `startServer(options?) => Promise<{ server, config }>`
 - `defaultServerConfig`
 - `resolveServerConfig(options)`
+- `createApiApp(options?) => { app, config, container }`
+- `startApiServer(options?) => Promise<{ app, config, container, server }>`
+- `registerCoreModules(options?)`
+- `createDevRunnerConfig(options?)`
+- `DEFAULT_DEV_RUNNER_CONFIG`
 
 Remember to tick the corresponding item in `docs/TODO.md` once documentation work completes.

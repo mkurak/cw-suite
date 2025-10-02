@@ -26,7 +26,12 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "@cw-suite/api-di": "workspace:^",
+    "@cw-suite/api-cache-memory": "workspace:^",
+    "@cw-suite/api-events": "workspace:^",
+    "@cw-suite/api-queue-local": "workspace:^",
+    "@cw-suite/api-db-typeorm": "workspace:^"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",

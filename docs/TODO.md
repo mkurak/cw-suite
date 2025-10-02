@@ -8,7 +8,7 @@
 - [x] Identify packages that remain publishable individually vs. bundled only via core (decision: retain individual publishes under `@cw-suite/*`).
 
 ## 1. Package Exposure
-- [ ] Provide default bootstrap helpers (e.g., `createApiApp`, combined DI modules, default dev runner wiring).
+- [x] Provide default bootstrap helpers (e.g., `createApiApp`, combined DI modules, default dev runner wiring).
 - [ ] Document usage of scoped packages in consumer projects.
 
 ## 2. Integrate Existing Packages
