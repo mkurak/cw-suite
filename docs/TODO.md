@@ -30,3 +30,8 @@
 ## Tracking Notes
 - Maintain progress updates in `docs/CODEX.md` after each major milestone.
 - Extend this checklist as new requirements emerge during implementation.
+
+## 2025-10-02 Notes
+- [ ] Add `@jest/globals` to `@cw-suite/helper-colored-console` devDependencies and verify tests.
+- [ ] Monitor next release run after `@cw-suite` org token update; confirm scoped packages land on npm.
+- [ ] Document scoped import usage in consumer API projects.

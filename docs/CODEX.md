@@ -75,3 +75,9 @@
 
 ## 2025-10-02 07:42:20Z
 - Verified release pipeline setup.
+
+## 2025-10-02 16:03:41Z
+- Converted all packages to the `@cw-suite/*` npm scope; `cw.core` aggregator removed.
+- Release workflow (`.github/workflows/release.yml`) publishing scoped packages—pending successful `@cw-suite` org setup and fresh `NPM_TOKEN`.
+- Changeset updated to patch-bump all scoped packages; next run should publish `@cw-suite/api-core@0.2.2`, `@cw-suite/helper-dev-runner@1.0.10`, etc.
+- Outstanding: `@cw-suite/helper-colored-console` tests need `@jest/globals` dev dependency.
