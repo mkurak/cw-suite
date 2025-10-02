@@ -10,7 +10,6 @@
 		],
 		"hide-files.files": [
 			".changeset",
-			".devcontainer",
 			".github/workflows",
 			".github",
 			".pnpm-store",
@@ -23,7 +22,8 @@
 			"pnpm-lock.yaml",
 			"pnpm-workspace.yaml",
 			"prettier.config.cjs",
-			"tsconfig.base.json"
+			"tsconfig.base.json",
+			".devcontainer"
 		]
 	}
 }
