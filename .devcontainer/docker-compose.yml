@@ -1,0 +1,19 @@
+version: "3.8"
+
+name: cw-suite
+services:
+  app:
+    container_name: cw-app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
+    ports:
+      - "3000:3000"
+    environment:
+      # Node Env
+      - NODE_ENV=development
+      # App
+      - PORT=3000

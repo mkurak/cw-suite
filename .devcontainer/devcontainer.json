@@ -1,0 +1,30 @@
+{
+    "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+    "name": "cw-suite",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    // VS Code ayarları
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            // Gerekli eklentiler
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "openai.chatgpt",
+                "unjinjang.rest-api-client",
+                "ritwickdey.LiveServer",
+                "GitHub.vscode-github-actions"
+            ]
+        }
+    },
+    // Container ayağa kalktığında portları ileri taşı
+    "forwardPorts": [3000],
+    // Compose içinde çalıştırılacak servis(ler)
+    "runServices": ["app"],
+    // app servisindeki komutu override etmeyelim (compose'daki kalsın)
+    "overrideCommand": false
+}

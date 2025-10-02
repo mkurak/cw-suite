@@ -1,0 +1,168 @@
+export enum ServiceType {
+    Service = 'service',
+    Controller = 'controller',
+    Action = 'action',
+    Repository = 'repository',
+    Entity = 'entity',
+    Middleware = 'middleware'
+}
+
+export enum Lifecycle {
+    Singleton = 'singleton',
+    Scoped = 'scoped',
+    Transient = 'transient'
+}
+
+export interface InjectableOptions {
+    name?: string;
+    type?: ServiceType;
+    lifecycle?: Lifecycle;
+    middlewares?: ResolveToken[];
+}
+
+export interface Registration<T = unknown> {
+    token: string;
+    type: ServiceType;
+    lifecycle: Lifecycle;
+    target: InjectableClass<T>;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type InjectableClass<T = unknown> = new (...args: any[]) => T;
+
+export interface ForwardRef<T = unknown> {
+    forwardRef: () => ResolveToken<T>;
+}
+
+export type ResolveToken<T = unknown> = string | InjectableClass<T> | ForwardRef<T>;
+
+export function forwardRef<T>(factory: () => ResolveToken<T>): ForwardRef<T> {
+    return { forwardRef: factory };
+}
+
+export function isForwardRef<T>(token: ResolveToken<T>): token is ForwardRef<T> {
+    return typeof token === 'object' && token !== null && 'forwardRef' in token;
+}
+
+export type MiddlewareScope = 'route' | 'global';
+export type GlobalMiddlewarePhase = 'before' | 'after';
+
+export interface MiddlewareClassMetadata {
+    scope: MiddlewareScope;
+    order: number;
+    phase?: GlobalMiddlewarePhase;
+}
+
+export interface MiddlewareHandler {
+    handle: (...args: unknown[]) => unknown | Promise<unknown>;
+}
+
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'TRACE';
+
+export interface ControllerMetadata {
+    basePath: string;
+    middlewares?: ResolveToken[];
+    tags?: string[];
+}
+
+export interface RouteMetadata {
+    method: HttpMethod;
+    path: string;
+    name?: string;
+    summary?: string;
+    description?: string;
+}
+
+export interface ResolveOptions {
+    sessionId?: string;
+    scope?: string;
+}
+
+export interface SessionInfo {
+    id: string;
+    createdAt: number;
+    scope?: string;
+}
+
+export interface ResolveTraceBase {
+    token: string;
+    target: InjectableClass;
+    lifecycle: Lifecycle;
+    path: string[];
+    depth: number;
+    options: ResolveOptions;
+}
+
+export type ResolveStartEvent = ResolveTraceBase;
+
+export interface ResolveSuccessEvent extends ResolveTraceBase {
+    instance: unknown;
+    duration: number;
+    cached: boolean;
+}
+
+export interface ResolveErrorEvent extends ResolveTraceBase {
+    error: Error;
+}
+
+export interface InstantiateEvent {
+    token: string;
+    target: InjectableClass;
+    lifecycle: Lifecycle;
+    path: string[];
+    depth: number;
+}
+
+export interface DisposeEvent {
+    token: string;
+    sessionId?: string;
+    scope?: string;
+    instance: unknown;
+}
+
+export type ContainerEventMap = {
+    'resolve:start': ResolveStartEvent;
+    'resolve:success': ResolveSuccessEvent;
+    'resolve:error': ResolveErrorEvent;
+    instantiate: InstantiateEvent;
+    dispose: DisposeEvent;
+    'stats:change': StatsChangeEvent;
+};
+
+export type ContainerEventName = keyof ContainerEventMap;
+
+export type ContainerEventListener<T extends ContainerEventName> = (
+    payload: ContainerEventMap[T]
+) => void;
+
+export interface ContainerLogEntry<T extends ContainerEventName = ContainerEventName> {
+    timestamp: number;
+    event: T;
+    payload: ContainerEventMap[T];
+}
+
+export interface ContainerLogOptions {
+    sink?: (entry: ContainerLogEntry) => void;
+    includeSuccess?: boolean;
+    includeInstantiate?: boolean;
+    includeDispose?: boolean;
+}
+
+export interface ChildContainerOptions {
+    include?: ResolveToken[];
+    exclude?: ResolveToken[];
+}
+
+export interface ContainerStats {
+    registrations: number;
+    singletonInstances: number;
+    activeSessions: number;
+    childContainers: number;
+}
+
+export interface StatsChangeEvent {
+    stats: ContainerStats;
+    previous: ContainerStats;
+    reason: string;
+    containerId: string;
+}

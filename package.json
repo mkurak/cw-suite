@@ -1,0 +1,27 @@
+{
+  "name": "cw-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Monorepo for cw API helper packages",
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "lint": "pnpm -r run lint",
+    "changeset": "changeset",
+    "release": "pnpm changeset version && pnpm install --no-frozen-lockfile && pnpm changeset publish",
+    "format": "pnpm -r run format",
+    "format:check": "pnpm -r run format:check"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@eslint/js": "^9.35.0",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/parser": "^8.44.0",
+    "eslint": "^9.35.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "typescript-eslint": "^8.44.0"
+  }
+}
