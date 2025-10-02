@@ -9,7 +9,7 @@
 
 ## 1. Package Exposure
 - [x] Provide default bootstrap helpers (e.g., `createApiApp`, combined DI modules, default dev runner wiring).
-- [ ] Document usage of scoped packages in consumer projects.
+- [x] Document usage of scoped packages in consumer projects.
 
 ## 2. Integrate Existing Packages
 - [ ] Audit each helper package API surface to decide export path consistency across packages.
