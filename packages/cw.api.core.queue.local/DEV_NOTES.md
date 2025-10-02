@@ -1,4 +1,4 @@
-# Developer Notes — cw.api.core.queue.local
+# Developer Notes — @cw-suite/api-queue-local
 
 > Reference for queue internals, retry semantics, and release workflow.
 
@@ -10,7 +10,7 @@
 - Default queue configuration (`ackTimeout`, `maxDeliveries`, `deadLetterQueue`)
   can be set via constructor options or `queue.configure({ defaultQueue })`.
 - The DI module (`queueModule`, `useQueue`) exposes a singleton `LocalQueue`
-  inside `cw.api.core.di` containers and guards against repeated default option
+  inside `@cw-suite/api-di` containers and guards against repeated default option
   application.
 
 ## Architecture Details

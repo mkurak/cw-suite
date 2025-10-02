@@ -7,14 +7,14 @@ import type {
     RouteMetadata
 } from './types.js';
 
-const PARAM_INJECT_KEY = Symbol.for('cw.api.core.di:paraminject');
-const OPTIONAL_PARAM_KEY = Symbol.for('cw.api.core.di:paramoptional');
-const PROPERTY_INJECT_KEY = Symbol.for('cw.api.core.di:propertyinject');
-const PROPERTY_OPTIONAL_KEY = Symbol.for('cw.api.core.di:propertyoptional');
-const ACTION_MIDDLEWARES_KEY = Symbol.for('cw.api.core.di:actionmiddlewares');
-const MIDDLEWARE_META_KEY = Symbol.for('cw.api.core.di:middlewaremeta');
-const CONTROLLER_META_KEY = Symbol.for('cw.api.core.di:controller');
-const ACTION_ROUTE_META_KEY = Symbol.for('cw.api.core.di:actionroute');
+const PARAM_INJECT_KEY = Symbol.for('@cw-suite/api-di:paraminject');
+const OPTIONAL_PARAM_KEY = Symbol.for('@cw-suite/api-di:paramoptional');
+const PROPERTY_INJECT_KEY = Symbol.for('@cw-suite/api-di:propertyinject');
+const PROPERTY_OPTIONAL_KEY = Symbol.for('@cw-suite/api-di:propertyoptional');
+const ACTION_MIDDLEWARES_KEY = Symbol.for('@cw-suite/api-di:actionmiddlewares');
+const MIDDLEWARE_META_KEY = Symbol.for('@cw-suite/api-di:middlewaremeta');
+const CONTROLLER_META_KEY = Symbol.for('@cw-suite/api-di:controller');
+const ACTION_ROUTE_META_KEY = Symbol.for('@cw-suite/api-di:actionroute');
 
 export type InjectMetadata = Record<number, ResolveToken>;
 export type OptionalMetadata = Set<number>;

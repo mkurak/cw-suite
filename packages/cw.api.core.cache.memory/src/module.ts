@@ -4,13 +4,13 @@ import {
     getContainer,
     registerModules,
     type Container
-} from 'cw.api.core.di';
+} from '@cw-suite/api-di';
 import { MemoryCache, type MemoryCacheOptions } from './memoryCache.js';
 
 const configuredCaches = new WeakSet<MemoryCache<unknown>>();
 
 export const cacheModule = createModule({
-    name: 'cw.api.core.cache.memory',
+    name: '@cw-suite/api-cache-memory',
     providers: [
         {
             useClass: MemoryCache,
@@ -39,7 +39,7 @@ export function useCache<V>(options: UseCacheOptions<V> = {}): MemoryCache<V> {
             configuredCaches.add(genericCache);
         } else {
             console.warn(
-                '[cw.api.core.cache.memory] useCache(): cacheOptions already applied to shared instance; ignoring subsequent call.'
+                '[@cw-suite/api-cache-memory] useCache(): cacheOptions already applied to shared instance; ignoring subsequent call.'
             );
         }
     }

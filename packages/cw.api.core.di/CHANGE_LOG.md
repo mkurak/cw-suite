@@ -27,12 +27,12 @@
 
 ## [1.1.3] - 2025-09-19
 ### Changed
-- Switched the internal logger to `createCwLogger` from `cw.helper.colored.console/themes/cw` for consistent theming.
+- Switched the internal logger to `createCwLogger` from `@cw-suite/helper-colored-console/themes/cw` for consistent theming.
 - Updated dependency to consume the latest console helper release with theme presets.
 
 ## [1.1.0] - 2025-09-19
 ### Added
-- Shared `cw.helper.colored.console` logger surfaced via `src/logger.ts` for consistent ANSI output.
+- Shared `@cw-suite/helper-colored-console` logger surfaced via `src/logger.ts` for consistent ANSI output.
 - ESM-based Git hook, release, and smoke scripts now use the colored logger for status reporting.
 
 ### Changed
@@ -41,7 +41,7 @@
 
 ## [1.0.0] - 2025-09-17
 ### Added
-- Initial public release of `cw.api.core.di` providing the shared DI core for the cw.api ecosystem.
+- Initial public release of `@cw-suite/api-di` providing the shared DI core for the cw.api ecosystem.
 - Constructor and property injection with optional dependencies, `@Inject`, `@Optional`, and `ForwardRefInject` for circular graphs.
 - Lifecycle management (`Singleton`, `Scoped`, `Transient`) with AsyncLocalStorage-based session utilities (`createSession`, `runInScope`, etc.).
 - Middleware, controller, and action decorators capturing routing metadata for framework adapters.

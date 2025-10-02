@@ -1,4 +1,4 @@
-import { Container, registerModules, resetContainer, getContainer } from 'cw.api.core.di';
+import { Container, registerModules, resetContainer, getContainer } from '@cw-suite/api-di';
 import { EventBus } from '../src/eventBus.js';
 import { eventsModule, useEvents } from '../src/module.js';
 

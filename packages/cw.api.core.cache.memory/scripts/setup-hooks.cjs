@@ -16,7 +16,7 @@ if (!isGitRepo()) {
 
 try {
     execSync('git config core.hooksPath .githooks', { stdio: 'ignore' });
-    console.log('[cw.api.core.cache.memory] Git hooks path configured to .githooks');
+    console.log('[@cw-suite/api-cache-memory] Git hooks path configured to .githooks');
 } catch (error) {
-    console.warn('[cw.api.core.cache.memory] Failed to configure git hooks path:', error.message);
+    console.warn('[@cw-suite/api-cache-memory] Failed to configure git hooks path:', error.message);
 }

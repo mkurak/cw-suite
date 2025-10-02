@@ -1,4 +1,4 @@
-# cw.api.core.queue.local
+# @cw-suite/api-queue-local
 
 Local, process-bound queue primitives tailored for cw API services. `LocalQueue`
 provides message fan-out, manual acknowledgements, configurable retries, and
@@ -16,12 +16,12 @@ lightweight dead-letter support without requiring an external broker.
 - **Diagnostics** – `getQueueStats()` exposes enqueue/pending/ack/nack counters
   so services can monitor throughput and saturation.
 - **DI friendly** – ship with a `queueModule` and `useQueue()` helper for
-  `cw.api.core.di` containers.
+  `@cw-suite/api-di` containers.
 
 ## Installation
 
 ```bash
-npm install cw.api.core.queue.local
+npm install @cw-suite/api-queue-local
 ```
 
 Target runtime: Node.js 18+ (pure ESM).
@@ -29,7 +29,7 @@ Target runtime: Node.js 18+ (pure ESM).
 ## Quick Start
 
 ```ts
-import { LocalQueue } from 'cw.api.core.queue.local';
+import { LocalQueue } from '@cw-suite/api-queue-local';
 
 const queue = new LocalQueue({
     defaultQueue: {
@@ -126,8 +126,8 @@ const stats = queue.getQueueStats('jobs');
 ## Dependency Injection
 
 ```ts
-import { registerModules, getContainer } from 'cw.api.core.di';
-import { LocalQueue, queueModule, useQueue } from 'cw.api.core.queue.local';
+import { registerModules, getContainer } from '@cw-suite/api-di';
+import { LocalQueue, queueModule, useQueue } from '@cw-suite/api-queue-local';
 
 // Manual module registration
 const container = getContainer();

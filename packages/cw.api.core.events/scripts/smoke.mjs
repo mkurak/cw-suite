@@ -2,7 +2,7 @@
 import { EventBus, defineEvent } from '../dist/index.js';
 
 function fail(message, error) {
-  console.error('[cw.api.core.events] Smoke test failed:', message);
+  console.error('[@cw-suite/api-events] Smoke test failed:', message);
   if (error) {
     console.error(error);
   }
@@ -37,7 +37,7 @@ try {
     fail('event registration missing after trigger');
   }
 
-  console.log('[cw.api.core.events] OK: smoke test passed');
+  console.log('[@cw-suite/api-events] OK: smoke test passed');
 } catch (error) {
   fail('unexpected error', error);
 }

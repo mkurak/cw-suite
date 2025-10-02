@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import { createColoredConsole } from 'cw.helper.colored.console';
+import { createColoredConsole } from '@cw-suite/helper-colored-console';
 import * as di from '../dist/index.js';
 
 const logger = createColoredConsole({
-  name: 'cw.api.core.di',
+  name: '@cw-suite/api-di',
   enabled: true
 });
 

@@ -1,4 +1,4 @@
-import { createCwLogger } from 'cw.helper.colored.console/themes/cw';
+import { createCwLogger } from '@cw-suite/helper-colored-console/themes/cw';
 
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 

@@ -42,7 +42,7 @@ function resolveConfiguration(config: TypeOrmConfiguration): ResolvedTypeOrmConf
                 const instance = await dataSourceFactory(options);
                 if (!instance?.initialize) {
                     throw new Error(
-                        '[cw.api.core.db.typeorm] dataSourceFactory must return a TypeORM DataSource instance.'
+                        '[@cw-suite/api-db-typeorm] dataSourceFactory must return a TypeORM DataSource instance.'
                     );
                 }
                 if (!instance.isInitialized) {
@@ -67,13 +67,13 @@ export class TypeOrmManager {
     configure(config: TypeOrmConfiguration, options: { allowOverride?: boolean } = {}): void {
         if (!config || typeof config !== 'object') {
             throw new Error(
-                '[cw.api.core.db.typeorm] configure() requires a configuration object.'
+                '[@cw-suite/api-db-typeorm] configure() requires a configuration object.'
             );
         }
 
         if (this.config && !options.allowOverride && !config.allowReconfigure) {
             console.warn(
-                '[cw.api.core.db.typeorm] configure() called multiple times; ignoring subsequent configuration.'
+                '[@cw-suite/api-db-typeorm] configure() called multiple times; ignoring subsequent configuration.'
             );
             return;
         }
@@ -83,7 +83,7 @@ export class TypeOrmManager {
         if (this.dataSource?.isInitialized) {
             void this.dataSource.destroy().catch((error) => {
                 console.error(
-                    '[cw.api.core.db.typeorm] Failed to dispose previous DataSource during reconfiguration.',
+                    '[@cw-suite/api-db-typeorm] Failed to dispose previous DataSource during reconfiguration.',
                     error
                 );
             });
@@ -92,7 +92,7 @@ export class TypeOrmManager {
 
         if (this.config.autoInitialize) {
             void this.ensureInitialized().catch((error) => {
-                console.error('[cw.api.core.db.typeorm] Auto-initialization failed.', error);
+                console.error('[@cw-suite/api-db-typeorm] Auto-initialization failed.', error);
             });
         }
     }
@@ -124,7 +124,7 @@ export class TypeOrmManager {
 
     getDataSourceOrFail(): DataSource {
         if (!this.dataSource?.isInitialized) {
-            throw new Error('[cw.api.core.db.typeorm] DataSource has not been initialized.');
+            throw new Error('[@cw-suite/api-db-typeorm] DataSource has not been initialized.');
         }
         return this.dataSource;
     }
@@ -159,7 +159,7 @@ export class TypeOrmManager {
     private async initialize(): Promise<DataSource> {
         if (!this.config) {
             throw new Error(
-                '[cw.api.core.db.typeorm] configure() must be called before initialization.'
+                '[@cw-suite/api-db-typeorm] configure() must be called before initialization.'
             );
         }
 

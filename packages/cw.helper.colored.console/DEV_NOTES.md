@@ -1,9 +1,9 @@
-# Developer Notes — cw.helper.colored.console
+# Developer Notes — @cw-suite/helper-colored-console
 
 > Reference cheat sheet for future sessions when the context window is limited.
 
 ## Overview
-- `cw.helper.colored.console` offers ANSI-aware logging helpers with theming, label prefixes, and pluggable writers.
+- `@cw-suite/helper-colored-console` offers ANSI-aware logging helpers with theming, label prefixes, and pluggable writers.
 - Zero runtime dependencies; built with TypeScript and shipped as pure ESM.
 - Targets Node.js 18+ with terminals that support ANSI escape codes.
 - Public API surface exports: `createColoredConsole`, `ColoredConsole`, `colorize`, `applyStyle`, `detectColorSupport`, `ansi`, plus the relevant TypeScript types.
@@ -57,7 +57,7 @@
 ## Metadata
 - `package.json` includes keywords, MIT license, provenance-enabled publish config, `sideEffects: false`, `engines.node: ">=18"`.
 - Distribution files: `dist/`, `README.md`, `LICENSE`.
-- Repository: `git+https://github.com/mkurak/cw.helper.colored.console.git`.
+- Repository: `git+https://github.com/mkurak/@cw-suite/helper-colored-console.git`.
 
 ## Testing Notes
 - `tests/ansi.test.ts` guards the raw ANSI helper exports.

@@ -16,7 +16,7 @@ if (!isGitRepo()) {
 
 try {
     execSync('git config core.hooksPath .githooks', { stdio: 'ignore' });
-    console.log('[cw.api.core.queue.local] Git hooks path configured to .githooks');
+    console.log('[@cw-suite/api-queue-local] Git hooks path configured to .githooks');
 } catch (error) {
-    console.warn('[cw.api.core.queue.local] Failed to configure git hooks path:', error.message);
+    console.warn('[@cw-suite/api-queue-local] Failed to configure git hooks path:', error.message);
 }

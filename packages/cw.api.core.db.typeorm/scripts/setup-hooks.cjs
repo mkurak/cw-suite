@@ -16,7 +16,7 @@ if (!isGitRepo()) {
 
 try {
     execSync('git config core.hooksPath .githooks', { stdio: 'ignore' });
-    console.log('[cw.api.core.db.typeorm] Git hooks path configured to .githooks');
+    console.log('[@cw-suite/api-db-typeorm] Git hooks path configured to .githooks');
 } catch (error) {
-    console.warn('[cw.api.core.db.typeorm] Failed to configure git hooks path:', error.message);
+    console.warn('[@cw-suite/api-db-typeorm] Failed to configure git hooks path:', error.message);
 }

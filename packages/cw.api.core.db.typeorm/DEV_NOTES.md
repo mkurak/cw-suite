@@ -1,4 +1,4 @@
-# Developer Notes — cw.api.core.db.typeorm
+# Developer Notes — @cw-suite/api-db-typeorm
 
 > Document decisions, commands, and release steps here.
 

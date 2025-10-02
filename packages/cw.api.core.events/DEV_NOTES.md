@@ -1,4 +1,4 @@
-# Developer Notes — cw.api.core.events
+# Developer Notes — @cw-suite/api-events
 
 > Event bus internals, coding conventions, and release workflow reference.
 

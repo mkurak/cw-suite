@@ -218,7 +218,7 @@ describe('TypeOrmManager', () => {
 
         await delay(0);
         expect(errorSpy).toHaveBeenCalledWith(
-            '[cw.api.core.db.typeorm] Auto-initialization failed.',
+            '[@cw-suite/api-db-typeorm] Auto-initialization failed.',
             expect.any(Error)
         );
         errorSpy.mockRestore();

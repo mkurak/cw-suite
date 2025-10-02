@@ -1,5 +1,5 @@
 {
-  "name": "cw.helper.colored.console",
+  "name": "@cw-suite/helper-colored-console",
   "version": "1.2.7",
   "type": "module",
   "main": "./dist/index.js",
@@ -71,7 +71,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mkurak/cw-suite.git",
-    "directory": "packages/cw.helper.colored.console"
+    "directory": "packages/@cw-suite/helper-colored-console"
   },
   "bugs": {
     "url": "https://github.com/mkurak/cw-suite/issues"

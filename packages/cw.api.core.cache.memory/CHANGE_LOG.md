@@ -43,7 +43,7 @@
 
 ## [0.2.0] - 2025-09-20
 - Added the `cacheModule` export and the `useCache()` helper to register
-  `MemoryCache` as a singleton inside `cw.api.core.di`.
+  `MemoryCache` as a singleton inside `@cw-suite/api-di`.
 - Documented DI usage and expanded developer notes with module details.
 - Introduced `tests/module.test.ts` to cover the DI integration path.
 

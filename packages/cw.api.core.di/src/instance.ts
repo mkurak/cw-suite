@@ -1,6 +1,6 @@
 import { Container } from './container.js';
 
-const GLOBAL_KEY = Symbol.for('cw.api.core.di.container');
+const GLOBAL_KEY = Symbol.for('@cw-suite/api-di.container');
 
 export function getContainer(): Container {
     const globalScope = globalThis as Record<PropertyKey, unknown>;

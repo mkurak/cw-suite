@@ -1,7 +1,7 @@
-# cw.api.core.di
+# @cw-suite/api-di
 
-[![npm version](https://img.shields.io/npm/v/cw.api.core.di.svg)](https://www.npmjs.com/package/cw.api.core.di)
-[![npm downloads](https://img.shields.io/npm/dm/cw.api.core.di.svg)](https://www.npmjs.com/package/cw.api.core.di)
+[![npm version](https://img.shields.io/npm/v/@cw-suite/api-di.svg)](https://www.npmjs.com/package/@cw-suite/api-di)
+[![npm downloads](https://img.shields.io/npm/dm/@cw-suite/api-di.svg)](https://www.npmjs.com/package/@cw-suite/api-di)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Table of Contents
@@ -76,7 +76,7 @@
 ## Overview
 
 ### Purpose & Philosophy
-`cw.api.core.di` is the foundation of the **cw.api** ecosystem: a TypeScript-first dependency injection container that emphasizes predictable lifecycles, explicit configuration, and minimal abstractions. Instead of hiding framework decisions behind heavy decorators or runtime magic, the container keeps responsibility in the hands of the application author—while still offering the ergonomics of modern DI (decorators, metadata, discovery helpers, scoped sessions, etc.).
+`@cw-suite/api-di` is the foundation of the **cw.api** ecosystem: a TypeScript-first dependency injection container that emphasizes predictable lifecycles, explicit configuration, and minimal abstractions. Instead of hiding framework decisions behind heavy decorators or runtime magic, the container keeps responsibility in the hands of the application author—while still offering the ergonomics of modern DI (decorators, metadata, discovery helpers, scoped sessions, etc.).
 
 Key design goals:
 - **Deterministic runtime** – every registration, resolution, and lifecycle transition is observable via events and statistics.
@@ -94,7 +94,7 @@ Key design goals:
 - Async-aware disposal pipeline: `dispose()` methods may return promises; container honors them during session termination and teardown.
 
 ### When to Use This Package
-Choose `cw.api.core.di` if you need:
+Choose `@cw-suite/api-di` if you need:
 - A lightweight DI core for custom frameworks or backend services where you control the runtime.
 - Strong lifecycle guarantees (scoped sessions, deterministic teardown) without adopting a full-stack opinionated framework.
 - Metadata-rich building blocks (middleware descriptors, controller/action annotations) that you can wire into your own HTTP/router layer.
@@ -111,11 +111,11 @@ If you prefer a batteries-included framework with routing/config baked in (e.g.,
 Install via npm (or your package manager of choice). The package targets Node.js 18+.
 
 ```bash
-npm install cw.api.core.di
+npm install @cw-suite/api-di
 # or
-yarn add cw.api.core.di
+yarn add @cw-suite/api-di
 # or
-pnpm add cw.api.core.di
+pnpm add @cw-suite/api-di
 ```
 
 > **TypeScript configuration**: ensure `experimentalDecorators` and `emitDecoratorMetadata` are enabled in your `tsconfig.json`. The repo’s `tsconfig.json` shows a recommended baseline.
@@ -125,7 +125,7 @@ A minimal setup registering two services, resolving them, and using a scoped ses
 
 ```ts
 import 'reflect-metadata';
-import { Container, Injectable, Inject, Lifecycle } from 'cw.api.core.di';
+import { Container, Injectable, Inject, Lifecycle } from '@cw-suite/api-di';
 
 // 1. Declare services with decorators.
 @Injectable({ lifecycle: Lifecycle.Singleton })
@@ -323,7 +323,7 @@ import {
   Lifecycle,
   createModule,
   registerModules
-} from 'cw.api.core.di';
+} from '@cw-suite/api-di';
 
 @Injectable({ lifecycle: Lifecycle.Singleton })
 class Logger {
@@ -664,7 +664,7 @@ A: The container catches exceptions and ignores them (to avoid breaking the app)
 ## Contributing Guide
 
 1. Fork the repository and create a feature branch.
-2. Run `npm install` in the package directory (`cw.api.core.di`).
+2. Run `npm install` in the package directory (`@cw-suite/api-di`).
 3. Implement changes with accompanying tests and update README/CHANGE_LOG when applicable.
 4. Run `npm run lint`, `npm run test:coverage`, and ensure the git hook passes.
 5. Submit a pull request describing the rationale and testing performed.

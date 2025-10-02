@@ -1,4 +1,4 @@
-# cw.api.core.events
+# @cw-suite/api-events
 
 Small but opinionated event bus designed for the cw API ecosystem. It favours
 explicit event definitions, deterministic subscriber execution, and full
@@ -21,7 +21,7 @@ control over the result that flows through a trigger chain.
 ## Installation
 
 ```bash
-npm install cw.api.core.events
+npm install @cw-suite/api-events
 ```
 
 Target runtime: Node.js 18+ (pure ESM).
@@ -29,7 +29,7 @@ Target runtime: Node.js 18+ (pure ESM).
 ## Quick Start
 
 ```ts
-import { EventBus, defineEvent } from 'cw.api.core.events';
+import { EventBus, defineEvent } from '@cw-suite/api-events';
 
 const userCreated = defineEvent<{ id: string }, string, 'async'>({
     name: 'user.created',
@@ -123,7 +123,7 @@ when they trigger themselves—subscribe to them directly for logging or metrics
 
 ## Integration Tips
 
-- **Dependency Injection** – When pairing with `cw.api.core.di`, import either
+- **Dependency Injection** – When pairing with `@cw-suite/api-di`, import either
   `eventsModule` or the `useEvents()` helper. The module registers `EventBus` as
   a singleton, while `useEvents()` attaches the module to the default container
   and returns the shared instance.

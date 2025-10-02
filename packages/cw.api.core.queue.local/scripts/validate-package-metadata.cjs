@@ -8,7 +8,7 @@ try {
     const raw = fs.readFileSync(pkgPath, 'utf8');
     pkg = JSON.parse(raw);
 } catch (error) {
-    console.error('[cw.api.core.queue.local] Unable to read package.json:', error.message);
+    console.error('[@cw-suite/api-queue-local] Unable to read package.json:', error.message);
     process.exit(1);
 }
 
@@ -35,7 +35,7 @@ if (!bugsUrl) missing.push('bugs.url');
 if (!homepageUrl) missing.push('homepage');
 
 if (missing.length > 0) {
-    const message = `[cw.api.core.queue.local] Missing package metadata: ${missing.join(', ')}. Please update package.json.`;
+    const message = `[@cw-suite/api-queue-local] Missing package metadata: ${missing.join(', ')}. Please update package.json.`;
     console.error(message);
     process.exit(1);
 }

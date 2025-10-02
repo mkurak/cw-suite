@@ -1,5 +1,5 @@
 {
-  "name": "cw.api.core.queue.local",
+  "name": "@cw-suite/api-queue-local",
   "version": "0.2.5",
   "description": "Local in-memory queue for cw API applications",
   "type": "module",
@@ -26,7 +26,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mkurak/cw-suite.git",
-    "directory": "packages/cw.api.core.queue.local"
+    "directory": "packages/@cw-suite/api-queue-local"
   },
   "homepage": "https://github.com/mkurak/cw-suite#readme",
   "bugs": {
@@ -46,8 +46,8 @@
     "prepublishOnly": "npm run build && node scripts/smoke.mjs"
   },
   "dependencies": {
-    "cw.api.core.di": "workspace:^",
-    "cw.helper.colored.console": "workspace:^"
+    "@cw-suite/api-di": "workspace:^",
+    "@cw-suite/helper-colored-console": "workspace:^"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
@@ -55,7 +55,6 @@
     "@types/node": "^24.5.2",
     "@typescript-eslint/eslint-plugin": "^8.44.0",
     "@typescript-eslint/parser": "^8.44.0",
-    "cw.helper.dev.runner": "workspace:^",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -64,7 +63,8 @@
     "ts-jest": "^29.4.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.44.0"
+    "typescript-eslint": "^8.44.0",
+    "@cw-suite/helper-dev-runner": "workspace:^"
   },
   "publishConfig": {
     "access": "public",

@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import { Container, getContainer, resetContainer } from 'cw.api.core.di';
+import { Container, getContainer, resetContainer } from '@cw-suite/api-di';
 import { typeOrmModule, useTypeOrm } from '../src/module.js';
 import { TypeOrmManager } from '../src/typeOrmManager.js';
 import { FakeDataSource, baseOptions } from './helpers.js';

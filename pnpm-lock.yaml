@@ -42,6 +42,9 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
     devDependencies:
+      '@cw-suite/helper-dev-runner':
+        specifier: workspace:^
+        version: link:../cw.helper.dev.runner
       '@eslint/js':
         specifier: ^9.35.0
         version: 9.36.0
@@ -63,9 +66,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.45.0(eslint@9.36.0)(typescript@5.9.3)
-      cw.helper.dev.runner:
-        specifier: workspace:^
-        version: link:../cw.helper.dev.runner
       eslint:
         specifier: ^9.35.0
         version: 9.36.0
@@ -99,13 +99,16 @@ importers:
 
   packages/cw.api.core.cache.memory:
     dependencies:
-      cw.api.core.di:
+      '@cw-suite/api-di':
         specifier: workspace:^
         version: link:../cw.api.core.di
-      cw.helper.colored.console:
+      '@cw-suite/helper-colored-console':
         specifier: workspace:^
         version: link:../cw.helper.colored.console
     devDependencies:
+      '@cw-suite/helper-dev-runner':
+        specifier: workspace:^
+        version: link:../cw.helper.dev.runner
       '@eslint/js':
         specifier: ^9.35.0
         version: 9.36.0
@@ -121,9 +124,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.45.0(eslint@9.36.0)(typescript@5.9.3)
-      cw.helper.dev.runner:
-        specifier: workspace:^
-        version: link:../cw.helper.dev.runner
       eslint:
         specifier: ^9.35.0
         version: 9.36.0
@@ -154,10 +154,10 @@ importers:
 
   packages/cw.api.core.db.typeorm:
     dependencies:
-      cw.api.core.di:
+      '@cw-suite/api-di':
         specifier: workspace:^
         version: link:../cw.api.core.di
-      cw.helper.colored.console:
+      '@cw-suite/helper-colored-console':
         specifier: workspace:^
         version: link:../cw.helper.colored.console
       reflect-metadata:
@@ -167,6 +167,9 @@ importers:
         specifier: ^0.3.27
         version: 0.3.27(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@24.6.2)(typescript@5.9.3))
     devDependencies:
+      '@cw-suite/helper-dev-runner':
+        specifier: workspace:^
+        version: link:../cw.helper.dev.runner
       '@eslint/js':
         specifier: ^9.35.0
         version: 9.36.0
@@ -182,9 +185,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.45.0(eslint@9.36.0)(typescript@5.9.3)
-      cw.helper.dev.runner:
-        specifier: workspace:^
-        version: link:../cw.helper.dev.runner
       eslint:
         specifier: ^9.35.0
         version: 9.36.0
@@ -215,7 +215,7 @@ importers:
 
   packages/cw.api.core.di:
     dependencies:
-      cw.helper.colored.console:
+      '@cw-suite/helper-colored-console':
         specifier: workspace:^
         version: link:../cw.helper.colored.console
       reflect-metadata:
@@ -267,13 +267,16 @@ importers:
 
   packages/cw.api.core.events:
     dependencies:
-      cw.api.core.di:
+      '@cw-suite/api-di':
         specifier: workspace:^
         version: link:../cw.api.core.di
-      cw.helper.colored.console:
+      '@cw-suite/helper-colored-console':
         specifier: workspace:^
         version: link:../cw.helper.colored.console
     devDependencies:
+      '@cw-suite/helper-dev-runner':
+        specifier: workspace:^
+        version: link:../cw.helper.dev.runner
       '@eslint/js':
         specifier: ^9.35.0
         version: 9.36.0
@@ -289,9 +292,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.45.0(eslint@9.36.0)(typescript@5.9.3)
-      cw.helper.dev.runner:
-        specifier: workspace:^
-        version: link:../cw.helper.dev.runner
       eslint:
         specifier: ^9.35.0
         version: 9.36.0
@@ -322,13 +322,16 @@ importers:
 
   packages/cw.api.core.queue.local:
     dependencies:
-      cw.api.core.di:
+      '@cw-suite/api-di':
         specifier: workspace:^
         version: link:../cw.api.core.di
-      cw.helper.colored.console:
+      '@cw-suite/helper-colored-console':
         specifier: workspace:^
         version: link:../cw.helper.colored.console
     devDependencies:
+      '@cw-suite/helper-dev-runner':
+        specifier: workspace:^
+        version: link:../cw.helper.dev.runner
       '@eslint/js':
         specifier: ^9.35.0
         version: 9.36.0
@@ -344,9 +347,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.44.0
         version: 8.45.0(eslint@9.36.0)(typescript@5.9.3)
-      cw.helper.dev.runner:
-        specifier: workspace:^
-        version: link:../cw.helper.dev.runner
       eslint:
         specifier: ^9.35.0
         version: 9.36.0
@@ -374,73 +374,6 @@ importers:
       typescript-eslint:
         specifier: ^8.44.0
         version: 8.45.0(eslint@9.36.0)(typescript@5.9.3)
-
-  packages/cw.core:
-    dependencies:
-      cw.api.core:
-        specifier: workspace:^
-        version: link:../cw.api.core
-      cw.api.core.cache.memory:
-        specifier: workspace:^
-        version: link:../cw.api.core.cache.memory
-      cw.api.core.db.typeorm:
-        specifier: workspace:^
-        version: link:../cw.api.core.db.typeorm
-      cw.api.core.di:
-        specifier: workspace:^
-        version: link:../cw.api.core.di
-      cw.api.core.events:
-        specifier: workspace:^
-        version: link:../cw.api.core.events
-      cw.api.core.queue.local:
-        specifier: workspace:^
-        version: link:../cw.api.core.queue.local
-      cw.helper.colored.console:
-        specifier: workspace:^
-        version: link:../cw.helper.colored.console
-      cw.helper.dev.runner:
-        specifier: workspace:^
-        version: link:../cw.helper.dev.runner
-    devDependencies:
-      '@eslint/js':
-        specifier: ^9.35.0
-        version: 9.36.0
-      '@types/jest':
-        specifier: ^30.0.0
-        version: 30.0.0
-      '@types/node':
-        specifier: ^24.5.2
-        version: 24.6.2
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^8.44.0
-        version: 8.45.0(@typescript-eslint/parser@8.45.0(eslint@9.36.0)(typescript@5.9.3))(eslint@9.36.0)(typescript@5.9.3)
-      '@typescript-eslint/parser':
-        specifier: ^8.44.0
-        version: 8.45.0(eslint@9.36.0)(typescript@5.9.3)
-      eslint:
-        specifier: ^9.35.0
-        version: 9.36.0
-      eslint-config-prettier:
-        specifier: ^10.1.8
-        version: 10.1.8(eslint@9.36.0)
-      eslint-plugin-prettier:
-        specifier: ^5.5.4
-        version: 5.5.4(eslint-config-prettier@10.1.8(eslint@9.36.0))(eslint@9.36.0)(prettier@3.6.2)
-      jest:
-        specifier: ^30.1.3
-        version: 30.2.0(@types/node@24.6.2)(ts-node@10.9.2(@types/node@24.6.2)(typescript@5.9.3))
-      prettier:
-        specifier: ^3.6.2
-        version: 3.6.2
-      ts-jest:
-        specifier: ^29.4.3
-        version: 29.4.4(@babel/core@7.28.4)(@jest/transform@30.2.0)(@jest/types@30.2.0)(babel-jest@30.2.0(@babel/core@7.28.4))(jest-util@30.2.0)(jest@30.2.0(@types/node@24.6.2)(ts-node@10.9.2(@types/node@24.6.2)(typescript@5.9.3)))(typescript@5.9.3)
-      ts-node:
-        specifier: ^10.9.2
-        version: 10.9.2(@types/node@24.6.2)(typescript@5.9.3)
-      typescript:
-        specifier: ^5.9.2
-        version: 5.9.3
 
   packages/cw.helper.colored.console:
     devDependencies:
@@ -489,7 +422,7 @@ importers:
 
   packages/cw.helper.dev.runner:
     dependencies:
-      cw.helper.colored.console:
+      '@cw-suite/helper-colored-console':
         specifier: workspace:^
         version: link:../cw.helper.colored.console
     devDependencies:

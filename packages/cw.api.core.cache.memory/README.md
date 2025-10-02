@@ -1,4 +1,4 @@
-# cw.api.core.cache.memory
+# @cw-suite/api-cache-memory
 
 In-memory cache utilities for the **cw.api** ecosystem. The package exposes a
 single `MemoryCache` class that favours predictable behaviour, TTL support, and
@@ -19,13 +19,13 @@ small helper APIs for deduplicated value resolution.
 ## Installation
 
 ```bash
-npm install cw.api.core.cache.memory
+npm install @cw-suite/api-cache-memory
 ```
 
 ## Quick Start
 
 ```ts
-import { MemoryCache } from 'cw.api.core.cache.memory';
+import { MemoryCache } from '@cw-suite/api-cache-memory';
 
 const cache = new MemoryCache<string>({ defaultTtl: 1000 * 60 });
 
@@ -42,11 +42,11 @@ console.log(cache.keysByTag('config')); // => ['feature-flags']
 
 ## DI Integration
 
-When using the cache inside the `cw.api.core.di` container, import either the `cacheModule` export or the `useCache()` helper:
+When using the cache inside the `@cw-suite/api-di` container, import either the `cacheModule` export or the `useCache()` helper:
 
 ```ts
-import { getContainer, registerModules } from 'cw.api.core.di';
-import { MemoryCache, cacheModule, useCache } from 'cw.api.core.cache.memory';
+import { getContainer, registerModules } from '@cw-suite/api-di';
+import { MemoryCache, cacheModule, useCache } from '@cw-suite/api-cache-memory';
 
 // Option 1: apply the module manually
 const container = getContainer();
@@ -71,7 +71,7 @@ The module registers `MemoryCache` as a singleton so the same instance lives for
 If you need an isolated cache with custom defaults, call `createMemoryCache()`:
 
 ```ts
-import { createMemoryCache } from 'cw.api.core.cache.memory';
+import { createMemoryCache } from '@cw-suite/api-cache-memory';
 
 const isolatedCache = createMemoryCache({ defaultTtl: 2000, maxEntries: 500 });
 ```

@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import { Container, registerModules, resetContainer, getContainer } from 'cw.api.core.di';
+import { Container, registerModules, resetContainer, getContainer } from '@cw-suite/api-di';
 import { MemoryCache, cacheModule, useCache, createMemoryCache } from '../src/index.js';
 
 describe('cacheModule', () => {

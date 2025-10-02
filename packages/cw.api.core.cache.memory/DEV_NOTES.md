@@ -1,4 +1,4 @@
-# Developer Notes — cw.api.core.cache.memory
+# Developer Notes — @cw-suite/api-cache-memory
 
 > Quick reference for future sessions when context is limited.
 
@@ -9,7 +9,7 @@
 - No runtime dependencies. Targets Node.js 18+ with TypeScript sources compiled
   to ESM output under `dist/`.
 - `cacheModule` and `useCache()` (in `src/module.ts`) integrate the cache with
-  `cw.api.core.di`, registering a singleton instance on the container. `useCache()`
+  `@cw-suite/api-di`, registering a singleton instance on the container. `useCache()`
   accepts `cacheOptions` to tweak defaults and an optional `configure` callback for
   advanced adjustments.
 

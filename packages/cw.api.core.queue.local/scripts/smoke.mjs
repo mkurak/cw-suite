@@ -19,7 +19,7 @@ async function waitFor(predicate, timeout = 1000) {
 }
 
 function fail(message, error) {
-  console.error('[cw.api.core.queue.local] Smoke test failed:', message);
+  console.error('[@cw-suite/api-queue-local] Smoke test failed:', message);
   if (error) {
     console.error(error);
   }
@@ -52,7 +52,7 @@ try {
   }
 
   queue.deleteQueue('smoke-queue');
-  console.log('[cw.api.core.queue.local] OK: smoke test passed');
+  console.log('[@cw-suite/api-queue-local] OK: smoke test passed');
 } catch (error) {
   fail('unexpected error', error);
 }

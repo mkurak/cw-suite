@@ -1,5 +1,5 @@
 {
-  "name": "cw.api.core.cache.memory",
+  "name": "@cw-suite/api-cache-memory",
   "version": "0.3.6",
   "description": "In-memory cache utilities for cw API",
   "type": "module",
@@ -26,7 +26,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mkurak/cw-suite.git",
-    "directory": "packages/cw.api.core.cache.memory"
+    "directory": "packages/@cw-suite/api-cache-memory"
   },
   "homepage": "https://github.com/mkurak/cw-suite#readme",
   "bugs": {
@@ -46,8 +46,8 @@
     "prepublishOnly": "npm run build && node scripts/smoke.mjs"
   },
   "dependencies": {
-    "cw.helper.colored.console": "workspace:^",
-    "cw.api.core.di": "workspace:^"
+    "@cw-suite/api-di": "workspace:^",
+    "@cw-suite/helper-colored-console": "workspace:^"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
@@ -64,7 +64,7 @@
     "ts-jest": "^29.4.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
-    "cw.helper.dev.runner": "workspace:^"
+    "@cw-suite/helper-dev-runner": "workspace:^"
   },
   "publishConfig": {
     "access": "public",

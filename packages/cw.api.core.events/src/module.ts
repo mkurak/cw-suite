@@ -4,11 +4,11 @@ import {
     getContainer,
     registerModules,
     type Container
-} from 'cw.api.core.di';
+} from '@cw-suite/api-di';
 import { EventBus } from './eventBus.js';
 
 export const eventsModule = createModule({
-    name: 'cw.api.core.events',
+    name: '@cw-suite/api-events',
     providers: [
         {
             useClass: EventBus,

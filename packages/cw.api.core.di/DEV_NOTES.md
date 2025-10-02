@@ -3,7 +3,7 @@
 > Reference sheet for future sessions when context is limited.
 
 ## Project Overview
-- `cw.api.core.di` is the shared dependency-injection container for the cw API ecosystem.
+- `@cw-suite/api-di` is the shared dependency-injection container for the cw API ecosystem.
 - Design goals: minimal external dependencies, deterministic behaviour, explicit lifecycle and scope control.
 - Requires Node.js 18+; source is TypeScript targeting ES2020 with Jest/ESLint/Prettier for tooling.
 
@@ -24,7 +24,7 @@
 - Async disposal pipeline awaiting promise-based `dispose()` hooks.
 
 ## Logging
-- All logging funnels through `cw.helper.colored.console` (`src/logger.ts`) to produce consistent ANSI output.
+- All logging funnels through `@cw-suite/helper-colored-console` (`src/logger.ts`) to produce consistent ANSI output.
 - Runtime diagnostics (`enableEventLogging`), release tooling, smoke tests, and hook setup scripts reuse the shared logger theme.
 
 ## Testing & Coverage

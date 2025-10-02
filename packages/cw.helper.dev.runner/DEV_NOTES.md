@@ -1,9 +1,9 @@
-# Developer Notes — cw.helper.dev.runner
+# Developer Notes — @cw-suite/helper-dev-runner
 
 > Reference guide for future sessions when the conversation history is limited.
 
 ## Overview
-- `cw.helper.dev.runner` is a lightweight development runner that watches directories, rebuilds, and restarts Node applications.
+- `@cw-suite/helper-dev-runner` is a lightweight development runner that watches directories, rebuilds, and restarts Node applications.
 - Zero runtime dependencies; implemented in TypeScript and published as pure ESM.
 - Requires Node.js 18+ for stable `fs.watch` behaviour and modern language features.
 - CLI entry point: `cw-dev-runner` (aliased via `bin` in `package.json`).
@@ -50,7 +50,7 @@
 - `runCommandAwait` rejects when a command cannot be spawned; see `tests/exec.test.ts` for coverage.
 
 ## Future Ideas
-- Integrate `cw.helper.colored.console` for ANSI styled logs.
+- Integrate `@cw-suite/helper-colored-console` for ANSI styled logs.
 - Provide presets for common frameworks (Express, Fastify) to simplify configuration.
 - Optional integration with `chokidar` for more robust cross-platform watching if ever needed.
 

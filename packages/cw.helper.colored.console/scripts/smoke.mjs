@@ -2,7 +2,7 @@
 import * as coloredConsole from '../dist/index.js';
 
 function fail(message, error) {
-  console.error('[cw.helper.colored.console] Smoke test failed:', message);
+  console.error('[@cw-suite/helper-colored-console] Smoke test failed:', message);
   if (error) {
     console.error(error);
   }
@@ -28,8 +28,8 @@ try {
     fail('createColoredConsole did not return a logger instance');
   }
 
-  logger.debug('[cw.helper.colored.console] smoke logger ready');
-  console.log('[cw.helper.colored.console] OK: smoke test passed');
+  logger.debug('[@cw-suite/helper-colored-console] smoke logger ready');
+  console.log('[@cw-suite/helper-colored-console] OK: smoke test passed');
 } catch (error) {
   fail('unexpected error', error);
 }

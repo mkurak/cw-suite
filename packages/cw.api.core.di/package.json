@@ -1,5 +1,5 @@
 {
-  "name": "cw.api.core.di",
+  "name": "@cw-suite/api-di",
   "version": "1.1.10",
   "main": "./dist/index.js",
   "publishConfig": {
@@ -54,13 +54,13 @@
     "LICENSE"
   ],
   "dependencies": {
-    "cw.helper.colored.console": "workspace:^",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "@cw-suite/helper-colored-console": "workspace:^"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/mkurak/cw-suite.git",
-    "directory": "packages/cw.api.core.di"
+    "directory": "packages/@cw-suite/api-di"
   },
   "bugs": {
     "url": "https://github.com/mkurak/cw-suite/issues"

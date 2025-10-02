@@ -1,6 +1,6 @@
-# cw.helper.dev.runner
+# @cw-suite/helper-dev-runner
 
-`cw.helper.dev.runner` provides a lightweight development runtime that watches your project directories, triggers builds, and restarts your application without relying on external reload tools.
+`@cw-suite/helper-dev-runner` provides a lightweight development runtime that watches your project directories, triggers builds, and restarts your application without relying on external reload tools.
 
 ## Features
 
@@ -14,7 +14,7 @@
 Install the runner alongside your service or library:
 
 ```bash
-npm install --save-dev cw.helper.dev.runner
+npm install --save-dev @cw-suite/helper-dev-runner
 ```
 
 ## Usage
@@ -51,7 +51,7 @@ Use `cw-dev-runner --help` to see all available flags.
 ## Programmatic API
 
 ```ts
-import { loadConfig, resolveConfig, DevRunner } from 'cw.helper.dev.runner';
+import { loadConfig, resolveConfig, DevRunner } from '@cw-suite/helper-dev-runner';
 
 const { config } = loadConfig();
 const resolved = resolveConfig(config, { run: 'node dist/server.js' });

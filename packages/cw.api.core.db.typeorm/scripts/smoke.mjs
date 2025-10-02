@@ -2,7 +2,7 @@
 import { TypeOrmManager, createManagedDataSource } from '../dist/index.js';
 
 function fail(message, error) {
-  console.error('[cw.api.core.db.typeorm] Smoke test failed:', message);
+  console.error('[@cw-suite/api-db-typeorm] Smoke test failed:', message);
   if (error) {
     console.error(error);
   }
@@ -73,7 +73,7 @@ async function smokeFactory() {
 try {
   await smokeManager();
   await smokeFactory();
-  console.log('[cw.api.core.db.typeorm] OK: smoke test passed');
+  console.log('[@cw-suite/api-db-typeorm] OK: smoke test passed');
 } catch (error) {
   fail('unexpected error', error);
 }

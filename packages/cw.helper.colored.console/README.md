@@ -1,4 +1,4 @@
-# cw.helper.colored.console
+# @cw-suite/helper-colored-console
 
 Minimal yet flexible ANSI-aware logging helpers for **cw** projects. This package wraps `console` with color themes, name labels, and ergonomics that fit both application code and libraries.
 
@@ -36,16 +36,16 @@ Minimal yet flexible ANSI-aware logging helpers for **cw** projects. This packag
 
 ## Installation
 ```bash
-npm install cw.helper.colored.console
+npm install @cw-suite/helper-colored-console
 # or
-pnpm add cw.helper.colored.console
+pnpm add @cw-suite/helper-colored-console
 # or
-yarn add cw.helper.colored.console
+yarn add @cw-suite/helper-colored-console
 ```
 
 ## Quick Start
 ```ts
-import { createColoredConsole } from 'cw.helper.colored.console';
+import { createColoredConsole } from '@cw-suite/helper-colored-console';
 
 const logger = createColoredConsole({
     name: 'api',
@@ -94,13 +94,13 @@ import {
     type BackgroundName,
     type ConsoleWriter,
     type LogLevel
-} from 'cw.helper.colored.console';
+} from '@cw-suite/helper-colored-console';
 ```
 
 Subpath exports expose preset themes:
 
 ```ts
-import { createCwLogger, cwTheme } from 'cw.helper.colored.console/themes/cw';
+import { createCwLogger, cwTheme } from '@cw-suite/helper-colored-console/themes/cw';
 ```
 
 ## API Reference
@@ -211,7 +211,7 @@ Missing keys fall back to the defaults, so you can tweak just the levels you nee
 Inject a writer when you need structured logging or transport changes:
 ```ts
 import pino from 'pino';
-import { createColoredConsole } from 'cw.helper.colored.console';
+import { createColoredConsole } from '@cw-suite/helper-colored-console';
 
 const stream = pino();
 const logger = createColoredConsole({
@@ -237,7 +237,7 @@ When a writer method is missing (`warn`, `debug`, ...), it automatically falls b
 
 ### Per-module Logger
 ```ts
-import { createColoredConsole } from 'cw.helper.colored.console';
+import { createColoredConsole } from '@cw-suite/helper-colored-console';
 
 export const logger = createColoredConsole({
     name: 'payments',
@@ -271,7 +271,7 @@ You can also instantiate with `enabled: false` for deterministic test output.
 
 ### Standalone Colorize Helper
 ```ts
-import { colorize } from 'cw.helper.colored.console';
+import { colorize } from '@cw-suite/helper-colored-console';
 
 const banner = colorize('[server]', { color: 'greenBright', bold: true }, { enabled: true });
 console.log(banner, 'ready');

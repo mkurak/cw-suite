@@ -6,10 +6,10 @@
   ],
   "postInstall": {
     "dependencies": [
-      "cw.helper.colored.console"
+      "@cw-suite/helper-colored-console"
     ],
     "devDependencies": [
-      "cw.helper.dev.runner"
+      "@cw-suite/helper-dev-runner"
     ],
     "run": [
       "npm install",

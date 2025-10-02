@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execSync } from 'node:child_process';
-import { createColoredConsole } from 'cw.helper.colored.console';
+import { createColoredConsole } from '@cw-suite/helper-colored-console';
 
 const logger = createColoredConsole({
   name: 'cw-di',

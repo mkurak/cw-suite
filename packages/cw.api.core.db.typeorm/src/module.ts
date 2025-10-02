@@ -4,14 +4,14 @@ import {
     getContainer,
     registerModules,
     type Container
-} from 'cw.api.core.di';
+} from '@cw-suite/api-di';
 import { TypeOrmManager } from './typeOrmManager.js';
 import type { TypeOrmConfiguration, UseTypeOrmOptions } from './types.js';
 
 const configuredManagers = new WeakSet<TypeOrmManager>();
 
 export const typeOrmModule = createModule({
-    name: 'cw.api.core.db.typeorm',
+    name: '@cw-suite/api-db-typeorm',
     providers: [
         {
             useClass: TypeOrmManager,

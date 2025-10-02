@@ -57,7 +57,7 @@ export interface ConfigureOptions {
 }
 
 export interface UseTypeOrmOptions {
-    container?: import('cw.api.core.di').Container;
+    container?: import('@cw-suite/api-di').Container;
     config?: TypeOrmConfiguration;
     autoInitialize?: boolean;
     configure?: (manager: import('./typeOrmManager.js').TypeOrmManager) => void;

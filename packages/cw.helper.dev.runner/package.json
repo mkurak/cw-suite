@@ -1,5 +1,5 @@
 {
-  "name": "cw.helper.dev.runner",
+  "name": "@cw-suite/helper-dev-runner",
   "version": "1.0.9",
   "type": "module",
   "main": "./dist/index.js",
@@ -64,7 +64,7 @@
     "cw-dev-runner": "dist/cli.js"
   },
   "dependencies": {
-    "cw.helper.colored.console": "workspace:^"
+    "@cw-suite/helper-colored-console": "workspace:^"
   },
   "sideEffects": false,
   "engines": {
@@ -73,7 +73,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mkurak/cw-suite.git",
-    "directory": "packages/cw.helper.dev.runner"
+    "directory": "packages/@cw-suite/helper-dev-runner"
   },
   "bugs": {
     "url": "https://github.com/mkurak/cw-suite/issues"

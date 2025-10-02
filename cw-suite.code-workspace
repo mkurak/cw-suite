@@ -7,6 +7,23 @@
 	"settings": {
 		"github-actions.workflows.pinned.workflows": [
 			"cw.api.core.di/.github/workflows/publish.yml"
+		],
+		"hide-files.files": [
+			".changeset",
+			".devcontainer",
+			".github/workflows",
+			".github",
+			".pnpm-store",
+			".vscode",
+			"node_modules",
+			".gitignore",
+			".prettierignore",
+			"cw-suite.code-workspace",
+			"eslint.config.mjs",
+			"pnpm-lock.yaml",
+			"pnpm-workspace.yaml",
+			"prettier.config.cjs",
+			"tsconfig.base.json"
 		]
 	}
 }

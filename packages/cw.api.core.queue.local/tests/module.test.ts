@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import { Container, registerModules, resetContainer, getContainer } from 'cw.api.core.di';
+import { Container, registerModules, resetContainer, getContainer } from '@cw-suite/api-di';
 import { LocalQueue, queueModule, useQueue } from '../src/index.js';
 import { waitFor } from './helpers.js';
 

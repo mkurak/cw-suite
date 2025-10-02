@@ -4,14 +4,14 @@ import {
     getContainer,
     registerModules,
     type Container
-} from 'cw.api.core.di';
+} from '@cw-suite/api-di';
 import { LocalQueue } from './localQueue.js';
 import type { QueueOptions } from './types.js';
 
 const configuredQueues = new WeakSet<LocalQueue>();
 
 export const queueModule = createModule({
-    name: 'cw.api.core.queue.local',
+    name: '@cw-suite/api-queue-local',
     providers: [
         {
             useClass: LocalQueue,
@@ -40,7 +40,7 @@ export function useQueue(options: UseQueueOptions = {}): LocalQueue {
             configuredQueues.add(queue);
         } else {
             console.warn(
-                '[cw.api.core.queue.local] useQueue(): defaultQueue already applied to shared instance; ignoring subsequent call.'
+                '[@cw-suite/api-queue-local] useQueue(): defaultQueue already applied to shared instance; ignoring subsequent call.'
             );
         }
     }

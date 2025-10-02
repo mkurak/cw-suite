@@ -2,7 +2,7 @@
 import { MemoryCache, createMemoryCache } from '../dist/index.js';
 
 function fail(message, error) {
-  console.error('[cw.api.core.cache.memory] Smoke test failed:', message);
+  console.error('[@cw-suite/api-cache-memory] Smoke test failed:', message);
   if (error) {
     console.error(error);
   }
@@ -30,7 +30,7 @@ try {
     fail('clear() should remove all entries');
   }
 
-  console.log('[cw.api.core.cache.memory] OK: smoke test passed');
+  console.log('[@cw-suite/api-cache-memory] OK: smoke test passed');
 } catch (error) {
   fail('unexpected error', error);
 }

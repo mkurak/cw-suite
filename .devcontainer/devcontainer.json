@@ -17,7 +17,8 @@
                 "openai.chatgpt",
                 "unjinjang.rest-api-client",
                 "ritwickdey.LiveServer",
-                "GitHub.vscode-github-actions"
+                "GitHub.vscode-github-actions",
+                "roonie007.hide-files"
             ]
         }
     },

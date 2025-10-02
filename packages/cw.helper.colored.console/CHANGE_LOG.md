@@ -46,7 +46,7 @@
 
 ## [1.0.0] - 2025-09-19
 ### Added
-- Initial public release of `cw.helper.colored.console` with ESM-only distribution and typed API surface.
+- Initial public release of `@cw-suite/helper-colored-console` with ESM-only distribution and typed API surface.
 - `createColoredConsole` factory and `ColoredConsole` class supporting named prefixes, theming, and pluggable writers.
 - `applyStyle`/`colorize` helpers with foreground/background colors, bold/dim/italic/underline styling.
 - `detectColorSupport` heuristics honoring `NO_COLOR`, `FORCE_COLOR`, and TTY detection.

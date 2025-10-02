@@ -1,5 +1,5 @@
 {
-  "name": "cw.api.core",
+  "name": "@cw-suite/api-core",
   "version": "0.2.1",
   "description": "Core Express server utilities for cw API projects.",
   "license": "ISC",
@@ -46,12 +46,12 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.44.0",
-    "cw.helper.dev.runner": "workspace:^"
+    "@cw-suite/helper-dev-runner": "workspace:^"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/mkurak/cw-suite.git",
-    "directory": "packages/cw.api.core"
+    "directory": "packages/@cw-suite/api-core"
   },
   "bugs": {
     "url": "https://github.com/mkurak/cw-suite/issues"
