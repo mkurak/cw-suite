@@ -1,20 +1,20 @@
 # @cw-suite/api-core
 
-Minimal Express 5 başlangıç katmanı. `createApp` ve `startServer` yardımcıları; JSON gövde işleme, sağlık kontrolü ve yapılandırılabilir host/port ayarlarını tek pakette toplar.
+Minimal Express 5 bootstrap layer. The helpers `createApp` and `startServer` wire JSON parsing, a health check route, and configurable host/port settings into a single package.
 
-## Öne Çıkanlar
-- **Sıfır eşik** – tek satırla Express uygulaması oluşturup port dinlemeye hazır hale getirir.
-- **Sağlık kontrolü** – `/health` rotası varsayılan olarak açık, kapanabilir veya farklı bir path ile yeniden yapılandırılabilir.
-- **Deterministik yapılandırma** – `ServerOptions` ile port/host ayarları yapılır, env değişkenleri (`PORT`, `HOST`) otomatik okunur.
-- **Test dostu** – `createApp` salt Express instance döndürür; SuperTest gibi araçlarla kolayca test edilir.
+## Highlights
+- **Zero friction** – spin up an Express app and start listening with a couple of lines.
+- **Health check ready** – `/health` is enabled by default and can be disabled or remapped to a custom path.
+- **Deterministic configuration** – `ServerOptions` control host/port while environment variables (`PORT`, `HOST`) are automatically respected.
+- **Test friendly** – `createApp` returns a plain Express instance, making SuperTest scenarios straightforward.
 
-## Kurulum
+## Installation
 
 ```bash
 npm install @cw-suite/api-core
 ```
 
-## Hızlı Başlangıç
+## Quick Start
 
 ```ts
 import { createApp, startServer } from '@cw-suite/api-core';
@@ -29,20 +29,20 @@ app.get('/users/:id', async (req, res) => {
 await startServer({ port: 4000 });
 ```
 
-- `createApp` Express örneğini ve uygulanmış yapılandırmayı döndürür.
-- `startServer` aynı yapılandırmayı kullanarak HTTP sunucusunu başlatır ve `{ server, config }` döner.
+- `createApp` returns the Express instance alongside the resolved configuration.
+- `startServer` applies the same configuration, starts the HTTP server, and resolves `{ server, config }`.
 
-## Yapılandırma
-`ServerOptions`, `ServerConfig` arayüzlerini kullanarak davranışı kontrol edebilirsiniz:
+## Configuration
+Control runtime behavior with the `ServerOptions`/`ServerConfig` interfaces:
 
-| Seçenek | Açıklama | Varsayılan |
+| Option | Description | Default |
 | --- | --- | --- |
-| `host` | `app.listen` tarafından kullanılacak adres | `process.env.HOST ?? '0.0.0.0'` |
-| `port` | Dinlenecek port. Geçersiz değerler hata fırlatır. | `Number(process.env.PORT) || 3000` |
-| `enableHealthCheck` | Health check rotasını aktif/pasif eder | `true` |
-| `healthCheckPath` | Sağlık kontrolü rotasının yolu | `/health` |
+| `host` | Address used by `app.listen` | `process.env.HOST ?? '0.0.0.0'` |
+| `port` | Port to listen on. Invalid values throw. | `Number(process.env.PORT) || 3000` |
+| `enableHealthCheck` | Enables or disables the health check route | `true` |
+| `healthCheckPath` | Path exposed for the health check | `/health` |
 
-Programatik olarak varsayılanları görmek veya birleştirmek için:
+Inspect or merge defaults programmatically:
 
 ```ts
 import { defaultServerConfig, resolveServerConfig } from '@cw-suite/api-core';
@@ -51,9 +51,9 @@ const custom = resolveServerConfig({ port: 8080, enableHealthCheck: false });
 console.log(defaultServerConfig, custom);
 ```
 
-## Sağlık Kontrolü
-- `enableHealthCheck` `true` iken `GET <healthCheckPath>` isteği `{ status: 'ok' }` yanıtı üretir.
-- Route içindeki handler ihtiyaç halinde genişletilebilir, örneğin dış servis kontrollerini entegre etmek için `createApp` sonrasında middleware ekleyebilirsiniz.
+## Health Check
+- When `enableHealthCheck` is `true`, `GET <healthCheckPath>` responds with `{ status: 'ok' }`.
+- Extend the handler after `createApp` to perform dependency probes.
 
 ```ts
 const { app, config } = createApp();
@@ -63,8 +63,8 @@ app.get(config.healthCheckPath, async (_req, res) => {
 });
 ```
 
-## Test Senaryoları
-`createApp` dönen Express instance'ı ile SuperTest kullanımı:
+## Testing
+`createApp` returns an Express instance that works seamlessly with SuperTest:
 
 ```ts
 import request from 'supertest';
@@ -79,10 +79,10 @@ describe('health check', () => {
 });
 ```
 
-## API Özeti
+## API Summary
 - `createApp(options?) => { app, config }`
 - `startServer(options?) => Promise<{ server, config }>`
 - `defaultServerConfig`
 - `resolveServerConfig(options)`
 
-README yenileme maddesi tamamlandığında `docs/TODO.md` üzerindeki ilgili kutucuk işaretlenmelidir.
+Remember to tick the corresponding item in `docs/TODO.md` once documentation work completes.

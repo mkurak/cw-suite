@@ -1,21 +1,21 @@
 # @cw-suite/api-cache-memory
 
-Bellek içi TTL cache implementation. Konsistent davranış, tag bazlı invalidation ve DI modülü ile paylaşılabilir singleton oluşturma özelliklerini sunar.
+In-memory TTL cache with tag-aware invalidation, deterministic eviction, and DI integration for shared singletons.
 
-## Öne Çıkanlar
-- **Deterministik TTL** – `defaultTtl` veya `set(..., { ttl })` ile süre tanımlayın; süresi dolan öğeler otomatik temizlenir.
-- **Tag yönetimi** – öğeleri tag'lerle ilişkilendirin, `invalidateByTag` ile toplu temizleyin.
-- **getOrSet birleştirme** – aynı anahtara yönelik eşzamanlı istekler tek factory çağrısına indirgenir.
-- **Gözlemlenebilirlik** – `onEvict` callback'i, istatistikler ve `keysByTag`, `entries()` gibi yardımcılar.
-- **DI entegrasyonu** – `cacheModule` ve `useCache` ile container tabanlı paylaşım.
+## Highlights
+- **Deterministic TTLs** – configure a `defaultTtl` or per-entry `ttl`; expired items are pruned automatically.
+- **Tag management** – associate entries with tags and remove them in batches via `deleteByTag`.
+- **getOrSet coalescing** – concurrent calls waiting on the same key collapse into a single factory invocation.
+- **Observability** – inspect cache stats, iterate entries, and receive eviction callbacks.
+- **DI ready** – ship `cacheModule` and `useCache` to share a singleton across containers.
 
-## Kurulum
+## Installation
 
 ```bash
 npm install @cw-suite/api-cache-memory
 ```
 
-## Hızlı Başlangıç
+## Quick Start
 
 ```ts
 import { MemoryCache } from '@cw-suite/api-cache-memory';
@@ -30,23 +30,22 @@ await cache.getOrSet('user:42', async () => {
 cache.set('feature-flags', ['alpha'], { tags: ['config'], ttl: 5_000 });
 ```
 
-## API Özeti
+## API Summary
 - `cache.set(key, value, { ttl, tags })`
 - `cache.get(key)` / `cache.peek(key)` / `cache.has(key)`
 - `await cache.getOrSet(key, factory, options)`
 - `cache.delete(key)` / `cache.clear()` / `cache.deleteByTag(tag)`
 - `cache.keys()` / `cache.keysByTag(tag)` / `cache.entries()`
-- `cache.stats()` – `size`, `hits`, `misses`, `evictions`, `pending`
+- `cache.stats()` → `{ size, hits, misses, evictions, pending }`
 - `cache.configure({ defaultTtl, maxEntries, onEvict })`
 
-### Eviction Bildirimleri
-`onEvict` callback'i `key`, `value`, `reason`, `metadata` alanlarını içerir. Reason değerleri:
-`expired`, `maxSize`, `manual`, `cleared`, `tag`.
+### Eviction Callbacks
+`onEvict` receives `{ key, value, reason, metadata }` where `reason` is one of `expired`, `maxSize`, `manual`, `cleared`, or `tag`.
 
-### Maksimum Eleman Sayısı
-`maxEntries` tanımlıysa FIFO bazlı temizleme tetiklenir. Temizleme sırasında `onEvict` çağrılır ve `reason: 'maxSize'` döner.
+### Max Entries
+When `maxEntries` is set the cache evicts in FIFO order until the size is within bounds. Each removal triggers `onEvict` with `reason: 'maxSize'`.
 
-## DI Modülü ile Kullanım
+## DI Integration
 
 ```ts
 import { useCache } from '@cw-suite/api-cache-memory';
@@ -65,11 +64,11 @@ const cache = useCache<{ id: string }>({
 await cache.getOrSet('user:1', () => fetchUser('1'));
 ```
 
-- `useCache` singleton `MemoryCache` örneğini container üzerinden çözerek paylaşır.
-- `cacheModule` modülünü manuel kayıt etmek için `registerModules(container, cacheModule)` kullanabilirsiniz.
+- `useCache` resolves a singleton `MemoryCache` from the container and applies `cacheOptions` once.
+- Register `cacheModule` manually with `registerModules(container, cacheModule)` when needed.
 
-## Test İpuçları
-- `timeProvider` opsiyonu ile kontrollü saat (örn. Jest fake timers) sağlayın.
-- `cache.stats().pending` ile devam eden `getOrSet` çağrılarını takip edin.
+## Testing Tips
+- Override `timeProvider` to control the clock (e.g. Jest fake timers).
+- Monitor ongoing `getOrSet` calls via `cache.stats().pending`.
 
-README yenileme maddesi tamamlandığında `docs/TODO.md` üzerindeki ilgili kutucuk işaretlenmelidir.
+Mark the relevant task in `docs/TODO.md` after finishing documentation updates.

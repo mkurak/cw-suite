@@ -1,22 +1,22 @@
 # @cw-suite/api-queue-local
 
-Harici broker gerektirmeden, süreç içinde çalışan kuyruk ve worker koordinasyonu. Manuel ack/nack akışı, DLQ desteği ve kapsamlı istatistikler sunar.
+In-process queue and worker orchestration without an external broker. Provides manual ack/nack control, dead-letter handling, and rich statistics.
 
-## Öne Çıkanlar
-- **Aynı süreçte kuyruğa alma** – çoklu named queue desteği, anında teslimat.
-- **Çalışan yönetimi** – her consumer için birden fazla worker örneği, paralel işleme.
-- **Ack/Nack denetimi** – `ack()` ve `nack({ requeue, reason })` ile akışı kontrol edin.
-- **Teslim sınırı & DLQ** – `maxDeliveries` ve `deadLetterQueue` ayarlarıyla tekrar deneme politikası.
-- **Zaman aşımı** – `ackTimeout` değerleriyle onaylanmayan mesajları yeniden kuyruğa alın.
-- **DI entegrasyonu** – `queueModule` ve `useQueue` ile singleton `LocalQueue` sağlayın.
+## Highlights
+- **Process-local queues** – create multiple named queues with immediate delivery.
+- **Worker orchestration** – spawn several workers per consumer for parallel processing.
+- **Ack/Nack control** – call `ack()` or `nack({ requeue, reason })` to steer flow.
+- **Retry & DLQ** – configure `maxDeliveries` and `deadLetterQueue` for retry policies.
+- **Timeouts** – `ackTimeout` automatically requeues unacknowledged messages.
+- **DI integration** – `queueModule` and `useQueue` share a singleton `LocalQueue`.
 
-## Kurulum
+## Installation
 
 ```bash
 npm install @cw-suite/api-queue-local
 ```
 
-## Hızlı Başlangıç
+## Quick Start
 
 ```ts
 import { LocalQueue } from '@cw-suite/api-queue-local';
@@ -33,7 +33,7 @@ queue.registerConsumer('emails', async (message) => {
 queue.publish('emails', { to: 'user@example.com' });
 ```
 
-## Consumer Ayarları
+## Consumer Options
 ```ts
 queue.registerConsumer('reports', processReport, {
   instances: 4,
@@ -42,12 +42,12 @@ queue.registerConsumer('reports', processReport, {
   deadLetterQueue: 'reports.dlq'
 });
 ```
-- `instances` ile aynı handler'ın kaç worker oluşturacağını seçin.
-- `autoAck: true` ise handler başarıyla bittiğinde otomatik `ack()` çağrılır.
-- `ackTimeout` dolar ve mesaj `ack()` edilmezse otomatik `nack({ requeue: true, reason: 'ack-timeout' })` gerçekleşir.
-- `deadLetterQueue` tanımlandıysa `maxDeliveries` sınırına ulaşan mesajlar oraya taşınır.
+- `instances` controls how many workers run the same handler.
+- With `autoAck: true` the consumer acknowledges after a successful handler run.
+- `ackTimeout` requeues messages when they remain unacknowledged.
+- `deadLetterQueue` receives messages that exceed `maxDeliveries`.
 
-## Yayın Opsiyonları
+## Publish Options
 ```ts
 const messageId = queue.publish('emails', payload, {
   messageId: 'custom-id',
@@ -56,19 +56,19 @@ const messageId = queue.publish('emails', payload, {
   ackTimeout: 15_000
 });
 ```
-- `metadata` tüketici context'inde `message.metadata` olarak ulaşılabilir ve freeze edilir.
-- `enqueuedAt` testi kolaylaştırmak için override edilebilir.
+- `metadata` appears via `message.metadata` and is frozen for safety.
+- Override `enqueuedAt` to simplify deterministic tests.
 
-## Yönetim API'leri
-- `declareQueue(name, options?)` – opsiyonel, publish/registerConsumer otomatik deklarasyon yapar.
-- `pauseQueue(name)` / `resumeQueue(name)` – queue içindeki tüm consumer'lar için.
-- `purgeQueue(name)` – bekleyen mesajları siler, dönen değer silinen mesaj sayısıdır.
-- `deleteQueue(name)` – kuyruğu tamamen kaldırır, bekleyen/işteki mesajlar `nack` edilir.
-- `getQueueStats(name)` – `messages`, `pending`, `acked`, `nacked`, `deadLettered` vb. sayaçlar.
-- `listQueues()` – tanımlı tüm kuyruk adları.
-- Consumer handle üzerinde `pause()`, `resume()`, `isPaused()`, `activeDeliveries()`, `stop({ drain, requeueInFlight })` fonksiyonları.
+## Management API
+- `declareQueue(name, options?)`
+- `pauseQueue(name)` / `resumeQueue(name)`
+- `purgeQueue(name)` – clears pending messages and returns the count.
+- `deleteQueue(name)` – removes the queue, nacking any in-flight deliveries.
+- `getQueueStats(name)` – exposes `messages`, `pending`, `acked`, `nacked`, `deadLettered`, etc.
+- `listQueues()` – lists all queues.
+- Consumer handle helpers: `pause()`, `resume()`, `isPaused()`, `activeDeliveries()`, `stop({ drain, requeueInFlight })`.
 
-## DI Modülü ile Kullanım
+## DI Usage
 
 ```ts
 import { useQueue } from '@cw-suite/api-queue-local';
@@ -81,7 +81,7 @@ const queue = useQueue({
   configure: (instance) => instance.declareQueue('default')
 });
 ```
-- `queueModule` modülünü `registerModules` ile manuel ekleyebilirsiniz.
-- `defaultQueue` yalnızca ilk `useQueue` çağrısında uygulanır; ikinci çağrılarda log uyarısı alırsınız.
+- Add the module manually with `registerModules(container, queueModule)` when composing modules yourself.
+- `defaultQueue` applies only during the first `useQueue` call; subsequent calls log a warning.
 
-README yenileme maddesi tamamlandığında `docs/TODO.md` üzerindeki ilgili kutucuk işaretlenmelidir.
+Update the matching TODO entry in `docs/TODO.md` after finalizing documentation.

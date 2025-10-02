@@ -12,7 +12,7 @@ class RootService {
 Reflect.defineMetadata('design:paramtypes', [DependencyService], RootService);
 
 describe('Container events & logging', () => {
-    it('yayınlanmış olaylarla çözümleme sürecini izler', () => {
+    it('tracks the resolve pipeline through emitted events', () => {
         const container = new Container();
         container.register(DependencyService);
         container.register(RootService);
@@ -49,7 +49,7 @@ describe('Container events & logging', () => {
         });
     });
 
-    it('hatalı çözümlemelerde resolve:error olayı üretir', () => {
+    it('emits resolve:error for failed resolutions', () => {
         const container = new Container();
         container.register(RootService);
 
@@ -63,7 +63,7 @@ describe('Container events & logging', () => {
         expect(errors[0]).toContain('RootService');
     });
 
-    it('scoped servisler oturum sonlanınca dispose olayı yayınlar', async () => {
+    it('dispatches dispose when scoped services leave a session', async () => {
         class ScopedService {}
 
         const container = new Container();
@@ -87,7 +87,7 @@ describe('Container events & logging', () => {
         expect(disposes[0]).toMatchObject({ token: 'ScopedService', scope: 'request' });
     });
 
-    it('enableEventLogging ile olaylar günlüklenebilir', () => {
+    it('forwards events to enableEventLogging sinks', () => {
         const container = new Container();
         container.register(DependencyService);
         container.register(RootService);
@@ -104,7 +104,7 @@ describe('Container events & logging', () => {
         expect(entries).toHaveLength(loggedCount);
     });
 
-    it('default trace sink yazma yollarını tetikler', async () => {
+    it('invokes logger methods through the default trace sink', async () => {
         const debugSpy = jest.spyOn(logger, 'debug').mockImplementation(() => undefined);
         const infoSpy = jest.spyOn(logger, 'info').mockImplementation(() => undefined);
         const successSpy = jest.spyOn(logger, 'success').mockImplementation(() => undefined);
@@ -122,7 +122,7 @@ describe('Container events & logging', () => {
         try {
             container.resolve('missing-token');
         } catch {
-            // beklenen hata, log kaydını tetikliyor
+            // expected error to trigger log output
         }
 
         detach();

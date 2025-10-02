@@ -1,23 +1,23 @@
 # @cw-suite/api-di
 
-cw API ekosisteminin tüm paketlerini taşıyan lightweight IoC konteyneri. Dekoratör destekli kayıtlar, öngörülebilir yaşam döngüsü, isteğe bağlı modül sistemi ve kapsam (scope) temelli çözümleme özellikleri sunar.
+Lightweight IoC container powering the cw API ecosystem. Provides decorator-driven registrations, predictable lifecycles, an opt-in module system, and scope-aware resolution.
 
-## Öne Çıkanlar
-- **TypeScript-first** – `@Injectable`, `@Inject`, `@Optional` decorators ve tip güvenli tokenlar.
-- **Yaşam döngüleri** – `Singleton`, `Scoped`, `Transient` servisler; `runInScope` ile istek/iş kapsamı.
-- **Modül sistemi** – `createModule` + `registerModules` ile paket düzeyinde DI konfigürasyonu paylaşın.
-- **Meta veri** – Controller/Route ve middleware dekoratörleri ile HTTP katmanı için discovery verisi üretir.
-- **Gözlemlenebilirlik** – Çözümleme ve dispose olaylarını dinleyin, `enableEventLogging` ile loglayın.
+## Highlights
+- **TypeScript-first** – `@Injectable`, `@Inject`, `@Optional`, and strongly typed tokens.
+- **Lifecycle control** – `Singleton`, `Scoped`, and `Transient` services with `runInScope` for request/job boundaries.
+- **Module system** – share DI configuration across packages using `createModule` plus `registerModules`.
+- **Metadata** – controller/route and middleware decorators produce discovery data for HTTP adapters.
+- **Observability** – listen to resolve/dispose events and pipe them through `enableEventLogging`.
 
-## Kurulum
+## Installation
 
 ```bash
 npm install @cw-suite/api-di
 ```
 
-> TypeScript projelerinde `experimentalDecorators` ve `emitDecoratorMetadata` seçeneklerini etkinleştirmeyi unutmayın.
+> Enable `experimentalDecorators` and `emitDecoratorMetadata` in your TypeScript configuration when using decorators.
 
-## Hızlı Başlangıç
+## Quick Start
 
 ```ts
 import {
@@ -63,44 +63,44 @@ container.runInScope('http', () => {
 });
 ```
 
-## Yaşam Döngüsü & Scoped Çözümleme
-- Varsayılan yaşam döngüsü `Singleton`dır.
-- `Lifecycle.Transient` seçtiğinizde her `resolve` yeni örnek döndürür.
-- `Lifecycle.Scoped`, `runInScope`/`runInSession` çağrısı sırasında cache'lenir, kapsam bittiğinde dispose edilir.
-- `container.destroySession(sessionId)` veya scope sonu otomatik dispose tetikler; async `dispose()` metodları beklenecektir.
-- `container.createChild({ include, exclude })` ile hiyerarşik konteynerler tanımlayıp seçili kayıtları devralabilirsiniz.
+## Lifecycles and Scope Resolution
+- Default lifecycle is `Singleton`.
+- `Lifecycle.Transient` creates a new instance on each `resolve`.
+- `Lifecycle.Scoped` caches within `runInScope`/`runInSession`; instances dispose when the scope ends.
+- `container.destroySession(sessionId)` or scope completion cleans up; async `dispose()` methods are awaited.
+- `container.createChild({ include, exclude })` builds hierarchical containers that inherit selected registrations.
 
-## Modül Sistemi
-- `createModule({ providers, exports, imports })` paket bazlı DI yapılandırması üretir.
-- `registerModules(container, moduleA, moduleB)` tekrar kayıt etmeyi engeller ve bağımlı modülleri sırayla yükler.
-- Provider tanımları doğrudan sınıf referansı veya `{ provide, useClass, options }` yapısı ile tanımlanır; `options.lifecycle` ile yaşam döngüsü atanır.
+## Module System
+- `createModule({ providers, exports, imports })` defines package-level DI configuration.
+- `registerModules(container, moduleA, moduleB)` ensures dependencies load exactly once.
+- Providers can be direct class references or `{ provide, useClass, options }`; set `options.lifecycle` to control scope.
 
-### Global konteyner yardımcıları
-- `getContainer()` – lazy singleton konteyner döndürür; paketler arası paylaşım için idealdir.
-- `resetContainer()` – testler arasında global konteyneri sıfırlamak için kullanılır.
+### Global Container Helpers
+- `getContainer()` – returns the shared singleton container, ideal for cross-package usage.
+- `resetContainer()` – resets the global container between tests.
 
-## Dekoratörler ve Metadata
+## Decorators and Metadata
 - `@Injectable({ lifecycle, name, type })`
-- `@Inject(token)` ve `@Optional()` – constructor veya property injection.
-- `@Controller`, `@Route` – HTTP adaptörleri için yol/method metadata üretir.
-- `@UseMiddleware`, `@RouteMiddleware`, `@GlobalMiddleware` – middleware tanımları.
-- `@ForwardRefInject` ve `forwardRef(() => Class)` – döngüsel bağımlılıkları çözmek için.
-- Metadata yardımcıları: `getControllerRoutes`, `getMiddlewareMetadata`, `getActionMiddlewares` vb.
+- `@Inject(token)` and `@Optional()` for constructor or property injection.
+- `@Controller`, `@Route` generate metadata consumed by HTTP adapters.
+- `@UseMiddleware`, `@RouteMiddleware`, `@GlobalMiddleware` define middleware pipelines.
+- `@ForwardRefInject` plus `forwardRef(() => Class)` break circular dependencies.
+- Metadata helpers: `getControllerRoutes`, `getMiddlewareMetadata`, `getActionMiddlewares`, etc.
 
-## Gözlemlenebilirlik
-- `container.on(event, listener)` ile `resolve:start|success|error`, `instantiate`, `dispose`, `stats:change` olaylarını izleyin.
-- `container.enableEventLogging({ includeSuccess, includeDispose, sink })` hızlı loglama sağlar.
-- `container.getStats()` kayıt, singleton sayısı ve aktif scope bilgilerini verir.
+## Observability
+- `container.on(event, listener)` taps into `resolve:start|success|error`, `instantiate`, `dispose`, `stats:change`.
+- `container.enableEventLogging({ includeSuccess, includeDispose, sink })` outputs trace events.
+- `container.getStats()` exposes registration counts, singleton instances, and active scopes.
 
-## Discovery Yardımcıları
-- `discover({ container, modules, filter })` dosya sistemi tabanlı olmayan, dekorasyon temelli servis keşfi için kullanılır.
-- Dönüş değeri, bağlanan provider'ların listesiyle birlikte metadata içerir; CLI veya bootstrap aşamasında faydalıdır.
+## Discovery Utilities
+- `discover({ container, modules, filter })` performs decorator-driven discovery without file system scanning.
+- Returns metadata and the discovered providers for use during bootstrap or tooling.
 
-## API Özeti
-- `Container` sınıfı (`register`, `resolve`, `runInScope`, `runInSession`, `createChild`, `on`, `clear` ...)
-- Dekoratörler: `Injectable`, `Inject`, `Optional`, `ForwardRefInject`, `Controller`, `Route`, `UseMiddleware`, `RouteMiddleware`, `GlobalMiddleware`
-- Modül yardımcıları: `createModule`, `registerModules`
-- Helper’lar: `getContainer`, `resetContainer`, `discover`, `forwardRef`
-- Tipler: `Lifecycle`, `ServiceType`, `ResolveOptions`, `ChildContainerOptions`, `ContainerStats`, `ContainerEventName`
+## API Summary
+- `Container` (`register`, `resolve`, `runInScope`, `runInSession`, `createChild`, `on`, `clear`, ...)
+- Decorators: `Injectable`, `Inject`, `Optional`, `ForwardRefInject`, `Controller`, `Route`, `UseMiddleware`, `RouteMiddleware`, `GlobalMiddleware`
+- Module helpers: `createModule`, `registerModules`
+- Utilities: `getContainer`, `resetContainer`, `discover`, `forwardRef`
+- Types: `Lifecycle`, `ServiceType`, `ResolveOptions`, `ChildContainerOptions`, `ContainerStats`, `ContainerEventName`
 
-README yenileme maddesi tamamlandığında `docs/TODO.md` üzerindeki ilgili kutucuk işaretlenmelidir.
+Mark the corresponding checkbox in `docs/TODO.md` when documentation updates conclude.

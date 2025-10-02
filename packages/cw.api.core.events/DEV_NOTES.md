@@ -57,7 +57,7 @@
 - `npm run build` – TypeScript build via `tsconfig.build.json`, emitting ESM to
   `dist/` with declarations.
 - `npm version <type>` – bumps the version and creates commit/tag (run `git push --follow-tags` afterwards).
-- `npm run hooks:install` – activates `.githooks` so format → lint → coverage kontrolleri commit öncesi devreye girer.
+- `npm run hooks:install` – activates `.githooks` so format → lint → coverage checks run before each commit.
 
 ## Release Checklist
 1. Update `CHANGE_LOG.md`, `README.md`, and this file to reflect changes.

@@ -1,22 +1,22 @@
 # @cw-suite/api-events
 
-Deterministik sonuç zinciri olan küçük ama esnek bir event bus. Her event explicit olarak tanımlanır, eşzamanlı/async mod belirlenir ve tetikleme sırasında context üzerinden kontrol sağlanır.
+Compact event bus with deterministic result pipelines. Every event is explicitly defined, mode-aware, and exposes full control through the invocation context.
 
-## Öne Çıkanlar
-- **Tip güvenli event tanımı** – `defineEvent` ile payload/result generics korunur.
-- **Sync & async modlar** – event tanımındaki `mode` subscriber sözleşmesini belirler.
-- **Result pipe** – her subscriber aynı `context.result` üzerinde çalışır, `setResult` ile değer değiştirebilir.
-- **Akış kontrolü** – `context.stop()` ve `context.stopForError()` zinciri erken bitirir, hata bilgisini taşır.
-- **Çekirdek lifecycle eventleri** – tetikleme öncesi/sonrası, subscriber ekleme/çıkarma ve hata durumlarını gözlemleyin.
-- **DI entegrasyonu** – `eventsModule` ve `useEvents` ile container içinde paylaşılan EventBus.
+## Highlights
+- **Type-safe definitions** – `defineEvent` preserves payload/result generics.
+- **Sync and async modes** – the `mode` field enforces the subscription contract.
+- **Result piping** – subscribers share `context.result` and can mutate it via `setResult`.
+- **Flow control** – `context.stop()` and `context.stopForError()` terminate the chain early while carrying error data.
+- **Core lifecycle events** – observe triggers, subscriber mutations, and errors out of the box.
+- **DI integration** – `eventsModule` and `useEvents` expose a shared `EventBus` inside a container.
 
-## Kurulum
+## Installation
 
 ```bash
 npm install @cw-suite/api-events
 ```
 
-## Hızlı Başlangıç
+## Quick Start
 
 ```ts
 import { EventBus, defineEvent } from '@cw-suite/api-events';
@@ -24,7 +24,7 @@ import { EventBus, defineEvent } from '@cw-suite/api-events';
 const userCreated = defineEvent<{ id: string }, { triggered: boolean }>({
   name: 'user.created',
   mode: 'async',
-  description: 'Fired after a user is persisted.'
+  description: 'Raised after a user is persisted.'
 });
 
 const bus = new EventBus();
@@ -38,12 +38,12 @@ const result = await bus.trigger(userCreated, { id: '42' });
 console.log(result.result); // { triggered: true }
 ```
 
-## Event Tanımı
+## Event Definition
 - `defineEvent({ name, mode, description, metadata, createInitialResult })`
-- `mode: 'sync' | 'async'` – subscriber fonksiyonunun promise döndürüp döndüremeyeceğini belirler.
-- `createInitialResult()` – her tetiklemede başlangıç `result` değerini oluşturur (opsiyonel).
+- `mode: 'sync' | 'async'` determines whether subscribers may return promises.
+- `createInitialResult()` seeds the `result` value for each trigger.
 
-## Tetikleme Seçenekleri
+## Trigger Options
 ```ts
 await bus.trigger(userCreated, payload, {
   initialResult: { triggered: false },
@@ -51,32 +51,32 @@ await bus.trigger(userCreated, payload, {
   metadata: { requestId }
 });
 ```
-- `throwOnError: true` olduğunda, subscriber hata fırlatırsa zincir durur ve hata tekrar fırlatılır.
-- `metadata` değeri `context.metadata` üzerinden tüm subscriber'lara ulaşır.
+- `throwOnError: true` rethrows subscriber errors after the chain stops.
+- `metadata` becomes available on `context.metadata` for every subscriber.
 
 ## Context API
-`EventContext` aşağıdaki yardımcıları sunar:
-- `context.payload` – tetiklenen veriler.
-- `context.result` – mutable sonuç nesnesi.
-- `context.setResult(value)` – thread-safe şekilde sonucu günceller.
-- `context.stop(reason?)` – kalan subscriber'ları atlar.
-- `context.stopForError(error, reason?)` – hata durumunu kaydeder, zinciri durdurur.
-- `context.hasSubscribers` – tetikleme anında kayıtlı subscriber var mı.
+`EventContext` exposes:
+- `context.payload`
+- `context.result`
+- `context.setResult(value)`
+- `context.stop(reason?)`
+- `context.stopForError(error, reason?)`
+- `context.hasSubscribers`
 
-## Abonelik Yönetimi
-- `bus.subscribe(eventDef, handler)` bir `unsubscribe()` fonksiyonu döndürür.
-- `bus.removeEvent(nameOrDef)` – opsiyonel, tanım ve subscriber'ları tamamen temizler.
-- `bus.getSubscriberCount(event)` / `bus.listEvents()` diagnostik amaçlı kullanılabilir.
+## Subscription Management
+- `bus.subscribe(eventDef, handler)` returns an `unsubscribe()` helper.
+- `bus.removeEvent(nameOrDef)` removes the definition and its subscribers.
+- `bus.getSubscriberCount(event)` / `bus.listEvents()` surface diagnostics.
 
-## Lifecycle Eventleri
-`CORE_EVENTS` sabiti aşağıdaki internal eventleri içerir:
+## Lifecycle Events
+`CORE_EVENTS` contains internal definitions:
 - `beforeTrigger`, `afterTrigger`
 - `subscriberRegistered`, `subscriberRemoved`
 - `subscriberError`
 
-Bu eventler `internal: true` olduğu için tekrar tetiklenirken sonsuz döngü oluşmaz.
+Internal events skip lifecycle hooks to avoid recursion.
 
-## DI Modülü ile Kullanım
+## DI Usage
 
 ```ts
 import { useEvents } from '@cw-suite/api-events';
@@ -90,6 +90,6 @@ container.runInScope('job', async () => {
 });
 ```
 
-- `eventsModule` singleton `EventBus` sağlayan bir DI modülüdür; `registerModules(container, eventsModule)` ile manuel eklenebilir.
+- `eventsModule` registers a singleton `EventBus`; add it manually with `registerModules(container, eventsModule)` when necessary.
 
-README yenileme maddesi tamamlandığında `docs/TODO.md` üzerindeki ilgili kutucuk işaretlenmelidir.
+Mark the matching TODO entry once the README update is complete.

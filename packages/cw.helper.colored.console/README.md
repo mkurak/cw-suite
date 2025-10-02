@@ -1,21 +1,21 @@
 # @cw-suite/helper-colored-console
 
-ANSI renk destekli minimal log aracı. Tema tanımları, isim etiketleri ve Node.js native `console` uyumluluğu sağlar.
+ANSI-aware logging helper with theme presets, name labels, and drop-in compatibility with the Node.js `console` API.
 
-## Öne Çıkanlar
-- **Tema tabanlı** – log seviyeleri için renk/stil eşlemesi (`info`, `success`, `warn`, `error`, `debug`).
-- **İsimlendirilmiş logger** – `[service] INFO ...` formatı, renkli başlıklarla.
-- **Adaptif renk** – `detectColorSupport()` terminal yeteneklerine göre otomatik aç/kapat.
-- **Esnek çıktı** – custom writer objeleri ile stdout yerine farklı hedeflere yönlendirin.
-- **Hazır cw teması** – `createCwLogger()` cw-suite varsayılan renk paletini yükler.
+## Highlights
+- **Theme driven** – assign styles per log level (`info`, `success`, `warn`, `error`, `debug`).
+- **Named loggers** – emits `[service] INFO ...` style prefixes with colorized labels.
+- **Adaptive color** – `detectColorSupport()` toggles output based on terminal capabilities.
+- **Flexible writers** – inject custom writers to redirect output streams.
+- **Ready-made cw theme** – `createCwLogger()` loads the default cw-suite palette.
 
-## Kurulum
+## Installation
 
 ```bash
 npm install @cw-suite/helper-colored-console
 ```
 
-## Hızlı Başlangıç
+## Quick Start
 
 ```ts
 import { createColoredConsole } from '@cw-suite/helper-colored-console';
@@ -32,15 +32,16 @@ logger.info('Server starting...');
 logger.error('Unhandled exception', new Error('boom'));
 ```
 
-## Tema ve Stil Seçenekleri
-- `color`, `background`: ANSI renk anahtarları (`red`, `blueBright`, `gray`...).
-- `bold`, `dim`, `italic`, `underline`: boolean stil bayrakları.
-- `ColoredConsoleOptions`
-  - `name`: logger etiketi
-  - `nameStyle`: isim etiketi için stil
-  - `theme`: seviye -> stil haritası
-  - `enabled`: renk kullanımını zorla/aç
-  - `writer`: `{ log, info, warn, error, debug }` metodları olan custom hedef
+## Theme and Style Options
+- `color`, `background`: ANSI colors (`red`, `blueBright`, `gray`, ...).
+- `bold`, `dim`, `italic`, `underline`: boolean style flags.
+
+`ColoredConsoleOptions` fields:
+- `name`
+- `nameStyle`
+- `theme`
+- `enabled`
+- `writer` (`{ log, info, warn, error, debug }`)
 
 ```ts
 import { createCwLogger } from '@cw-suite/helper-colored-console';
@@ -49,13 +50,13 @@ const logger = createCwLogger({ name: 'worker' });
 logger.success('Job finished');
 ```
 
-## Yardımcı Fonksiyonlar
+## Helper Functions
 - `applyStyle(text, style, { enabled })`
-- `colorize(text, style, options)` – `applyStyle` alias'ı.
-- `detectColorSupport()` – terminalde renk kullanımı mümkün mü.
-- `ansi` – raw escape kodlarını içeren nesne (ileri seviye kullanım).
+- `colorize(text, style, options)` – alias of `applyStyle`
+- `detectColorSupport()` – checks terminal capabilities
+- `ansi` – exposes raw escape codes
 
-## Writer Override Örneği
+## Writer Override Example
 ```ts
 import { createColoredConsole } from '@cw-suite/helper-colored-console';
 
@@ -67,4 +68,4 @@ const logger = createColoredConsole({
 });
 ```
 
-README yenileme maddesi tamamlandığında `docs/TODO.md` üzerindeki ilgili kutucuk işaretlenmelidir.
+Tick the associated TODO checkbox in `docs/TODO.md` after completing documentation updates.

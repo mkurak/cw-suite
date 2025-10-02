@@ -1,22 +1,22 @@
 # @cw-suite/helper-dev-runner
 
-Dosya değişikliklerini izleyen, isteğe bağlı build komutu çalıştıran ve uygulamanızı yeniden başlatan minimal geliştirme runner'ı.
+Lightweight development runner that watches files, optionally executes a build, and restarts your application.
 
-## Öne Çıkanlar
-- **Tek süreçte akış** – build komutunu bekleyip ardından çalıştırma komutunu yeniden başlatır.
-- **Debounce** – sık dosya değişikliklerinde gereksiz restart'ı engeller.
-- **Gözlemlenebilir loglar** – standart çıktıyı kullanan yalın logger.
-- **JSON konfigürasyonu** – `cw-dev-runner.config.json` ile repo kökünden yönetilir.
-- **CLI veya kütüphane** – CLI'ı doğrudan kullanabilir ya da `DevRunner` sınıfını programatik olarak çağırabilirsiniz.
+## Highlights
+- **Single-process loop** – waits for the build to finish and restarts the run command.
+- **Debounced restarts** – prevents redundant rebuilds on frequent changes.
+- **Structured logs** – minimal logger built on top of stdout.
+- **JSON configuration** – drive behavior via `cw-dev-runner.config.json` at the repo root.
+- **CLI or library** – use the CLI directly or orchestrate runs with the `DevRunner` class.
 
-## Kurulum
+## Installation
 
 ```bash
 npm install --save-dev @cw-suite/helper-dev-runner
 ```
 
-## CLI Kullanımı
-`package.json` script'i ekleyin:
+## CLI Usage
+Add a script to `package.json`:
 
 ```json
 {
@@ -26,7 +26,7 @@ npm install --save-dev @cw-suite/helper-dev-runner
 }
 ```
 
-Örnek `cw-dev-runner.config.json`:
+Example `cw-dev-runner.config.json`:
 
 ```json
 {
@@ -41,17 +41,17 @@ npm install --save-dev @cw-suite/helper-dev-runner
 }
 ```
 
-- `buildCommand` ilk çalıştırmada senkron olarak yürütülür.
-- `buildWatchCommand` watch modu açıkken arka planda çalıştırılır (opsiyonel).
-- `runWithNodeWatch: true` ise Node'un yerleşik `--watch` özelliği kullanılır.
-- `waitForPath` build sonrası beklenen dosyayı doğrular, yoksa zaman aşımı verir.
+- `buildCommand` executes synchronously on startup.
+- `buildWatchCommand` (optional) runs in the background when `watch` is true.
+- `runWithNodeWatch: true` leverages Node's built-in `--watch` flag.
+- `waitForPath` ensures the build output exists before starting the app.
 
-## Programatik Kullanım
+## Programmatic Usage
 
 ```ts
 import { loadConfig, resolveConfig, DevRunner } from '@cw-suite/helper-dev-runner';
 
-const { config } = loadConfig(); // cw-dev-runner.config.json okur (opsiyonel)
+const { config } = loadConfig();
 const resolved = resolveConfig(config, {
   run: { command: 'node', args: ['dist/server.js'] }
 });
@@ -66,21 +66,21 @@ process.on('SIGINT', async () => {
 ```
 
 ### `ResolvedRunnerConfig`
-| Alan | Açıklama | Varsayılan |
+| Field | Description | Default |
 | --- | --- | --- |
-| `projectRoot` | izleme ve komutlar için çalışma dizini | `process.cwd()` |
-| `watchDirs` | izlenecek klasörler | `['src']` |
-| `ignore` | yok sayılan klasörler | `['node_modules','dist','coverage','.git']` |
-| `debounceMs` | restart debouncing süresi | `200` |
-| `build` | isteğe bağlı build komutu | yok |
-| `run` | zorunlu çalışma komutu | `node dist/index.js` |
+| `projectRoot` | Working directory for watching and commands | `process.cwd()` |
+| `watchDirs` | Directories to watch | `['src']` |
+| `ignore` | Paths ignored by the watcher | `['node_modules','dist','coverage','.git']` |
+| `debounceMs` | Debounce window before restarting | `200` |
+| `build` | Optional build command | `undefined` |
+| `run` | Required run command | `node dist/index.js` |
 
-## Dosya İzleme Davranışı
-- `DirectoryWatcher` recursive olarak `watchDirs` altında değişiklik yakalar.
-- Her değişiklikte runner, build komutunu (tanımlıysa) çalıştırır, ardından run komutunu yeniden başlatır.
-- Eş zamanlı değişiklikler `debounceMs` ile gruplanır; ilk build bitmeden yeni build başlatılmaz.
+## File Watching Behavior
+- `DirectoryWatcher` recursively monitors `watchDirs` and triggers rebuilds on changes.
+- When changes fire, the runner executes the build (if configured) and restarts the run command.
+- Concurrent changes are batched using `debounceMs`; the runner waits for an ongoing rebuild to finish before starting another.
 
-## Log Düzeyleri
-Logger `info`, `warn`, `error`, `debug` seviyelerini destekler. CLI kullanımında `logLevel` alanı, `DevRunner` sınıfında ise isteğe bağlı özel logger geçebilirsiniz.
+## Logging
+The logger supports `info`, `warn`, `error`, and `debug`. Provide a custom logger instance to `DevRunner` if you need alternative formatting.
 
-README yenileme maddesi tamamlandığında `docs/TODO.md` üzerindeki ilgili kutucuk işaretlenmelidir.
+After finishing documentation work, update `docs/TODO.md` to reflect completion.
